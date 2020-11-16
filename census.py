@@ -1,98 +1,43 @@
-import json
 import requests
 import pandas as pd
-import pymongo
-from pymongo import MongoClient
-from config import jc_mongo_username, jc_mongo_password
 
-## Connect to mongodb
-client = MongoClient("mongodb+srv://" + jc_mongo_username + ":" + jc_mongo_password + "@techdata.hvqxz.mongodb.net/<dbname>?retryWrites=true&w=majority")
+def create_url(base_url, tables, geo):
+    return f"{base_url}?get={tables}&for={geo}"
 
-def cloud_collection(database, collection):
-    # Read mongo database 
-    db = client[database]
+HOST = "https://api.census.gov/data"
+year = "2018"
+dataset = "acs/acs5"
+base_url = "/".join([HOST, year, dataset])
+tables = {"B19301_001E":"Income per capita",
+            "B01002_002E":"Median Age Male",
+            "B01002_003E":"Median Age Male",
+            "B15003_022E":"Bachelor's degree > 25", 
+            "B15003_001E":"Total Education",# Will need to divide by total pop >25 B15003_001E
+            "B25077_001E":"Median Home Value",
+            "B08301_010E":"Public transportation",
+            "B08301_001E":"Total transportation"} # Will need to divide by total B08301_001E
 
-    # Read mongo collection
-    return db[collection]
+table_str = ",".join(tables.keys())
+geo = "zip%20code%20tabulation%20area:*"
 
-# Run to load data into the mongodb cloud
-def load_df(df,database,collection):
-    # Set collection to load data into 
-    db_c = cloud_collection(database,collection)
+url = create_url(base_url,table_str,geo)
 
-    # Read CSV to pandas dataframe
-    df.reset_index(inplace=True)
-    json_data = df.to_dict('records')
+r = requests.get(url)
 
-    db_c.insert_many(json_data)
+# Create a list of human-readable text
+col_names = list(tables.values())
+col_names.append("Zip Code")
 
-def readMongoCensus(database,collection):
-    # Load cloud collection from cloud
-    db_c = cloud_collection(database,collection)
+df = pd.DataFrame(columns = col_names, data = r.json()[1:])
 
-    # Read collection to a pandas dataframe
-    db_df = pd.DataFrame(list(db_c.find()))
+# Set zip code to index
+df.set_index("Zip Code",inplace=True)
 
-    del db_df['_id']
-    return db_df
+# Convert columns to a numeric data types
+df = df.apply(pd.to_numeric,errors="coerce")
 
-def table_df(table_id,geo_str,acs="latest"):
-    # Request education attainment data for the listed geo_ids
-    request_url = f"{base_url}{acs}?table_ids={table_id}&geo_ids={geo_str}"
-    
-    response = requests.get(request_url)
-    json = response.json()
-
-
-    df = pd.DataFrame()
-
-
-    col_keys = json['tables'][table_id]['columns']
-
-    col_names = {}
-    for column in col_keys:
-            col_names[column] = col_keys[column]['name']   
-
-    data = {} #{geoid1:{col_name1:value1,col_name2:value2},geoid2:{col_name1:value1,col_name2:value2}}
-    for geo,city_name in geo_ids.items():
-        data[city_name] = {}
-        for col_id,name in col_names.items():
-            data[city_name][name] = 100*json['data'][geo][table_id]['estimate'][col_id]/json['data'][geo][table_id]['estimate']["B15003001"]
-        
-
-    return pd.DataFrame(data)
-
-
-#####
-# RUN SECTION FOR CREATING DATAFRAME AND IMPORTING TO MONGODB
-#####
-
-# 
-
-# # geoids of San Fran, Atlanta, Chicago, NYC, and Austin
-# geo_ids = {"16000US0667000":"San Francisco, CA", 
-#             "16000US1304000":"Atlanta, GA", 
-#             "16000US1714000":"Chicago, IL", 
-#             "16000US3651000":"New York, NY", 
-#             "16000US4805000":"Austin, TX"}
-
-# # Create comma delimited string of geo_ids
-# geo_str = ",".join(geo_ids.keys())
-
-# base_url = "https://api.censusreporter.org/1.0/data/show/"
-
-# tables = {
-#     "B15003":"Education Attainment",
-#     "B08301":"Means of Transportation",
-#     "B08303":"Time to travel to work"
-# }
-
-# # loop through the years for the dataframe
-# for i in years: 
-
-#     edu_df = table_df("B15003",geo_str,year)
-#     edu_df = edu_df.transpose()
-# print(edu_df)
-
-# # Load data into database
-# load_df(edu_df,"censusData","2019 Education Attainment")
+# Convert education and transportation to a percentage of the population
+df["Bachelor's degree > 25"] = df["Bachelor's degree > 25"]/df["Total Education"]
+df["Public transportation"] = df["Public transportation"]/df["Total transportation"]
+df.drop(["Total Education","Total transportation"],axis=1, inplace=True)
+print(df.head())
