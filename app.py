@@ -3,7 +3,6 @@ from flask import Flask, render_template,jsonify
 import json
 from pymongo import MongoClient
 from connections import readMongoCloud
-from census import readMongoCensus
 
 import os 
 
