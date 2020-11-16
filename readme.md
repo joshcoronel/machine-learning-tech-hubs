@@ -24,16 +24,16 @@ well-known tech hubs:
 
 -   Atlanta Georgia
 
-We selected the following factors to analyze:
+We selected the following features to analyze:
 
--   Tech-related employment ([Bureau of Labor Statistics](https://www.bls.gov/))
+-   [Census report
+    API](https://github.com/censusreporter/census-api/blob/master/API.md) (Age,
+    education, ethnic group, median salary) 
 
--   Wages ([Bureau of Labor Statistics](https://www.bls.gov/))
+-   [Zillow API](https://www.zillow.com/howto/api/APIOverview.htm) (Real estate
+    data)
 
--   Real estate value
-    ([Zillow](https://www.zillow.com/howto/api/APIOverview.htm))
-
--   Crime (Government OpenData)
+-   FBI (criminal activity)
 
  
 
@@ -42,30 +42,48 @@ Gathering data
 
 Our objective was to find usable data from the data sources listed above and
 make readable in a JSON format to work with our JavaScript visualization
-libraries. Our approach starts with gathering CSV or JSON files.
+libraries. Our approach starts with identify the level of detail for location
+(city, neighborhood, zip codes, etc.) that is consistent across our data
+sources. Web APIs will then be used to pull data for NYC regions to feed into an
+unsupervised learning model.
 
  
 
 Data Manipulation
 -----------------
 
-The data files gathered from BLS and Crime data was cleaned in an appropriate
-structure to create the end visualizations. However, the real estate data
-required cleaning before use. In making manipulations, we imported a CSV and
-geojson file into a pandas dataframe. The CSV contained the real estate value of
-the city of interest drilled down by neighborhoods. We used a geojson file to
-create choropleth map of the same neighborhood names. This required to merge the
-data frames on the neighborhood names.
+PySpark is used to manipulate the data into setting each of the rows to a region
+and the columns into the features identified above.
+
+ 
+
+Machine Learnings
+-----------------
+
+Unsupervised k-mean machine learning
+
+1.  Create clusters (5-15) of NYC data to define the parameters of a tech hub.
+    This will serve as a training set
+
+2.  Create a new column to identify the location as a tech hub or not
+
+Supervised logistic regression machine learning:
+
+1.  Split NYC data into training and testing sets
+
+2.  Train a logistical regression model based on outputs defined from our
+    unsupervised machine learning model.
+
+3.  Use this model to predict which locations across the US are tech hubs
+
+4.  Export trained logistical training model?
 
  
 
 Data Loading
 ------------
 
-From here, all the data was loaded in MongoDB Atlas - a NoSQL cloud database.
-With the data in MongoDB Atlas, the data now can be directly access quickly from
-our Flask application and get converted to a json object to be read by
-Javascript.
+From here, all the data was loaded in an AWS database.
 
  
 
@@ -79,13 +97,14 @@ Data Visualization
 The geojson for each neighborhood was merged with a data frame. This data was
 used to plot a choropleth overlay on Leaflet.
 
-#### Crime Marker Clusters
+1.  Predicted tech hubs (indicated by color on the map)
 
-Json with crime data were obtained from open data portals from four of the five
-tech hub cities. After parsing through the data to find the coordinates, we used
-L.marker to create the crime markers.
+2.  Toggle/dropdown to map data for each machine learning feature with a color
+    spectrum (Age, education, ethnicity, salary, real estate)
 
-#### Interactions 
+ 
+
+#### Interactions
 
 -   Clusters
 
@@ -95,56 +114,4 @@ L.marker to create the crime markers.
 
 -   Toggle Later
 
-![](static/img/leaflet-map.png)
-
  
-
-### Plotly & Google Chart
-
-#### Bar chart/Treemap
-
-The jsonified data was read by JavaScript and unpacked into the javascript
-libraries.
-
-#### Interactions
-
--   Drop down by occupation
-
--   Clickable filters by wage percentiles
-
--   Double-click into city for occupation volume data
-
-![](static/img/occupation-data.png)
-
- 
-
-Insights
---------
-
--   Crime was expected to occur more in areas of poverty, but appeared even
-    across all real estate pricing values
-
--   In areas with the highest real estate prices, the top criminal activities
-    were
-
-    -   Dangerous drugs
-
-    -   Petit Larceny
-
-    -   Offenses related to theft
-
--   Of the 5 tech hubs, NYC holds the highest employment in tech at 38%.
-    Followed by:
-
-    -   San Francisco (20%)
-
-    -   Chicago (18%)
-
-    -   Atlanta (16%)
-
-    -   Austin (8%)
-
--   Largest employed occupation in tech are Software Developers and Software
-    Quality Assurance Analysts
-
--   Lowest employed occupation in tech are Mathematicians and Actuaries
