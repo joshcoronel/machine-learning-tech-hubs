@@ -10,7 +10,7 @@ dataset = "acs/acs5"
 base_url = "/".join([HOST, year, dataset])
 tables = {"B19301_001E":"Income per capita",
             "B01002_002E":"Median Age Male",
-            "B01002_003E":"Median Age Male",
+            "B01002_003E":"Median Age Female",
             "B15003_022E":"Bachelor's degree > 25", 
             "B15003_001E":"Total Education",# Will need to divide by total pop >25 B15003_001E
             "B25077_001E":"Median Home Value",
