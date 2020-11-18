@@ -25,21 +25,32 @@ def home():
 @app.route('/predict',methods=['POST'])
 def predict():
 
-    zipcode = request.form.values()
+    zipcode = [str(x) for x in request.form.values()]
+
 
     ## Code to call all the feature values for the requested zip code
     df = pd.read_csv("https://techhubml.s3.amazonaws.com/Master.csv", encoding="ISO-8859-1", converters={'zipcode': lambda x: str(x)})
-    zipcode = df.loc[df['zipcode'] == zipcode].values[0]
-    final_features = np.delete(zipcode,[0])
+    features = df.loc[df['zipcode'] == zipcode[0]].values[0]
+    city = features[2]
+    state = features[1]
+    final_features = np.delete(features,[0,1,2,3])
 
-    prediction = model.predict(final_features)
+    prediction = model.predict([final_features])
 
-    if prediction == 1:
+    if prediction == '1':
         output = "Yes"
     else:
         output = "No"
 
-    return render_template('ML.html', prediction_text = 'Tech Hub Status: ${}'.format())
+    results = [f"Tech hub status: {output}", f"{city}, {state}", f"Average Real Estate: ${final_features[0]}",f"Income per capita: ${final_features[1]}",f"Percentage of Population with Bachelors: {round(100*final_features[4],2)}%", f"Percentage of population that use public transportation: {round(100*final_features[5],2)}%", f"Median age - Female: {final_features[2]} Male: {final_features[3]}"] 
+    
+
+    return render_template('ML.html', prediction_text = results)
+
+@app.route('/ML')
+def ML():
+    # We hardcode some information to be returned
+    return render_template('ML.html')
 
 @app.route('/map')
 def map():
