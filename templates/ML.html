@@ -43,7 +43,7 @@
     <div class="container">
 
       <div class="logo float-left">
-        <h1 class="text-light"><a href="index.html"><span>Cyberstates</span></a></h1>
+        <h1 class="text-light"><a href="/"><span>Cyberstates</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -58,7 +58,7 @@
               <li><a href="techjobs">Trending Tech Occupations</a></li>
             </ul>
           </li>
-          <li><a href="ML.html">Machine Learning</a></li>
+          <li><a href="ML">Machine Learning</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 
@@ -73,9 +73,16 @@
       <div class="carousel-item active">
         <div class="carousel-container">
           <h2 class="animate__animated animate__fadeInDown">Tech Hub <span>Prediction</span></h2>
-          <form class="animate__animated animate__fadeInUp" action="{{ url_for('predict')}}"method="post">
+          <form class="animate__animated animate__fadeInUp" action="{{ url_for('predict')}}"method="POST">
             <input class="animate__animated animate__fadeInUp" type="text" name="zipcode input" placeholder="Zipcode Input" required="required" />
           <a href="" class="btn-get-started animate__animated animate__fadeInUp">Submit</a>
+          <br>
+          <p style= "color:white">
+            {% for result in prediction_text %}
+            {{ result }}<br>
+            {% endfor %}
+          </p>
+
         </div>
       </div>
 
