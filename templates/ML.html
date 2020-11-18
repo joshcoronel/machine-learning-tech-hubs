@@ -149,79 +149,7 @@
       </div>
         <!-- TABLE AND LEAFLET -->  
 
-    <!-- ======= Services Section ======= -->
-    <section class="services">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
-            <div class="icon-box icon-box-pink">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon-box icon-box-cyan">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon-box icon-box-green">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon-box icon-box-blue">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= Why Us Section ======= -->
-    <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-lg-6 video-box">
-            <img src="../static/img/why-us.jpg" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
-          </div>
-
-          <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
-
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-fingerprint"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-            </div>
-
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-gift"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Why Us Section -->
-
-    <!-- ======= Features Section ======= -->
+    <!-- ======= Our Process Section ======= -->
     <section class="features">
       <div class="container">
 
@@ -235,16 +163,8 @@
             <img src="../static/img/Capture.png" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 pt-4">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-            <p class="font-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
+            <h3>Data Sourcing and Cleaning</h3>
             <ul>
-<<<<<<< Updated upstream
-              <li><i class="icofont-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="icofont-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-=======
                 <li><i class="icofont-check"></i> Data was gathered from Zillow.com and US Census Bureau using their APIs</li>
                 <li><i class="icofont-check"></i> Cleaned and sorted data was merged using a Zip Code as the primary key </li>
                 <li><i class="icofont-check"></i> All data was loaded onto a Public AWS S3 bucket for use remotely</li>
@@ -255,61 +175,50 @@
                  machine learning algorithms. The aim was to make things automatic for the Front-End users so updating details in the future would be as simple 
                  as updating the files within our AWS S3 Buckets. All data used was for the year 2018 as this was the current information available.    
                </p>
->>>>>>> Stashed changes
             </ul>
           </div>
         </div>
 
         <div class="row" data-aos="fade-up">
           <div class="col-md-5 order-1 order-md-2">
-            <img src="../static/img/features-2.svg" class="img-fluid" alt="">
+            <img src="../static/img/k-means.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 pt-5 order-2 order-md-1">
-            <h3>Corporis temporibus maiores provident</h3>
-            <p class="font-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+            <h3>Unsupervised Learning with the K-Means Model</h3>
+            <ul>
+              <li><i class="icofont-check"></i> Removed string data or non-prediction data variables</li>
+              <li><i class="icofont-check"></i> Determined optimal number of clusters through the "Elbow Method"</li>
+              <li><i class="icofont-check"></i> Initialized K-means model with 5 clusters</li>
+              <p>
+                We imported the master.csv file containing all the state data and dropped columns containing strings (e.g. State, City, CountyName), leaving only our tech hub features and the numerical zipcode. Then, we assessed the data and removed any rows that contained any null values. Beginning the modeling process, we scaled our featured using MinMaxScaler(), fit our data and initialized the k-means model. To determine the amount of clusters that would be best for our dataset, we used the elbow method - where we choose on the graph the x-value along the elbow of the graph on what the cluster value would be. Lastly, we exported our clusters into a csv file for analysis.
             </p>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
-            </p>
+          </ul>
           </div>
         </div>
 
         <div class="row" data-aos="fade-up">
           <div class="col-md-5">
-            <img src="../static/img/features-3.svg" class="img-fluid" alt="">
+            <img src="../static/img/logreg.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 pt-5">
-            <h3>Sunt consequatur ad ut est nulla consectetur reiciendis animi voluptas</h3>
-            <p>Cupiditate placeat cupiditate placeat est ipsam culpa. Delectus quia minima quod. Sunt saepe odit aut quia voluptatem hic voluptas dolor doloremque.</p>
+            <h3>Supervised Learning with the Logistical Regression Model</h3>
             <ul>
-              <li><i class="icofont-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="icofont-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="icofont-check"></i> Facilis ut et voluptatem aperiam. Autem soluta ad fugiat.</li>
-            </ul>
+              <li><i class="icofont-check"></i> Determined cluster 4 as our definition for a tech hub</li>
+              <li><i class="icofont-check"></i> Pulled CSV with cluster predictions from our K-means model </li>
+              <li><i class="icofont-check"></i> Defined our x, y variables and split our test and training data </li>
+              <li><i class="icofont-check"></i> Ran unsupervised prediction and determined training scores </li>
+              <p>
+               We imported the cluster_predict.csv and made a new column where all rows with cluster for would equal to one and all else would equal to zero. We then defined x as the variables we wanted to use for the prediction and y as the binary cluster column. We then split our test and training model, choosing the test size to be 30% of our data. Next, we fit and trained the model and produced a training and testing score of 95%.
+            </p>
+          </ul>
           </div>
         </div>
 
         <div class="row" data-aos="fade-up">
           <div class="col-md-5 order-1 order-md-2">
-            <img src="../static/img/features-4.svg" class="img-fluid" alt="">
+            <img src="../static/img/pickle.JPG" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 pt-5 order-2 order-md-1">
-<<<<<<< Updated upstream
-            <h3>Quas et necessitatibus eaque impedit ipsum animi consequatur incidunt in</h3>
-            <p class="font-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
-            </p>
-=======
             <h3>Database Loading and Flask Development</h3>
             <ul>
               <li><i class="icofont-check"></i> Data was gathered from Zillow.com and US Census Bureau using their APIs</li>
@@ -323,7 +232,6 @@
                as updating the files within our AWS S3 Buckets. All data used was for the year 2018 as this was the current information available.    
              </p>
           </ul>
->>>>>>> Stashed changes
           </div>
         </div>
 
