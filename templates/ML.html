@@ -55,7 +55,7 @@
 
       <nav class="nav-menu float-right d-none d-lg-block">
         <ul>
-          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="team">Team</a></li>
           <li class="drop-down"><a href="">Interactive Data</a>
             <ul>
@@ -63,7 +63,7 @@
               <li><a href="techjobs">Trending Tech Occupations</a></li>
             </ul>
           </li>
-          <li><a href="ML">Machine Learning</a></li>
+          <li class="active"><a href="#">Machine Learning</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 
@@ -81,7 +81,9 @@
           <form class="animate__animated animate__fadeInUp" action="{{ url_for('predict')}}"method="POST">
             <input class="animate__animated animate__fadeInUp" type="text" name="zipcode input" placeholder="Zipcode Input" required="required" />
             <!-- <a class="btn-get-started animate__animated animate__fadeIn" onClick="document.getElementById('middle').scrollIntoView({behavior: 'smooth'});">Submit</a> -->
-            <button type="submit" class="btn-get-started animate__animated animate__fadeIn">Check Status</button>
+            <button type="submit" class="btn-get-started animate__animated animate__fadeIn">
+              Check Status
+            </button>
             <br>
           <p style= "color:white">
             {% for result in prediction_text %}
