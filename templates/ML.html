@@ -160,18 +160,21 @@
 
         <div class="row" data-aos="fade-up">
           <div class="col-md-5">
-            <img src="../static/img/features-1.svg" class="img-fluid" alt="">
+            <img src="../static/img/Capture.png" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 pt-4">
             <h3>Data Sourcing and Cleaning</h3>
             <ul>
-              <li><i class="icofont-check"></i> Data extracted from Census.gov API</li>
-              <li><i class="icofont-check"></i> Data cleanup done in Pyspark</li>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum
-              </p>
+                <li><i class="icofont-check"></i> Data was gathered from Zillow.com and US Census Bureau using their APIs</li>
+                <li><i class="icofont-check"></i> Cleaned and sorted data was merged using a Zip Code as the primary key </li>
+                <li><i class="icofont-check"></i> All data was loaded onto a Public AWS S3 bucket for use remotely</li>
+                <li><i class="icofont-check"></i> ETL process was completed using Pandas</li>
+               <p>
+                 Data from the Census Bureau was gathered based on certain features we wanted to explore along with data on real estate prices from Zillow.
+                 After the transforming of each individual dataframe, we merged both tables on their zip codes to create one final table which we used for our 
+                 machine learning algorithms. The aim was to make things automatic for the Front-End users so updating details in the future would be as simple 
+                 as updating the files within our AWS S3 Buckets. All data used was for the year 2018 as this was the current information available.    
+               </p>
             </ul>
           </div>
         </div>
@@ -217,15 +220,18 @@
           </div>
           <div class="col-md-7 pt-5 order-2 order-md-1">
             <h3>Database Loading and Flask Development</h3>
-            <p class="font-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
-            </p>
+            <ul>
+              <li><i class="icofont-check"></i> Data was gathered from Zillow.com and US Census Bureau using their APIs</li>
+              <li><i class="icofont-check"></i> Cleaned and sorted data was merged using a Zip Code as the primary key </li>
+              <li><i class="icofont-check"></i> All data was loaded onto a Public AWS S3 bucket for use remotely</li>
+              <li><i class="icofont-check"></i> ETL process was completed using Pandas</li>
+             <p>
+               Data from the Census Bureau was gathered based on certain features we wanted to explore along with data on real estate prices from Zillow.
+               After the transforming of each individual dataframe, we merged both tables on their zip codes to create one final table which we used for our 
+               machine learning algorithms. The aim was to make things automatic for the Front-End users so updating details in the future would be as simple 
+               as updating the files within our AWS S3 Buckets. All data used was for the year 2018 as this was the current information available.    
+             </p>
+          </ul>
           </div>
         </div>
 
