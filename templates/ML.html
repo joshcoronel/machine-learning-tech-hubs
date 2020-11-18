@@ -28,6 +28,11 @@
   <!-- Template Main CSS File -->
   <link href="../static/css/style.css" rel="stylesheet">
 
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" 
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" 
+  crossorigin="" />
+
   <!-- =======================================================
   * Template Name: Moderna - v2.1.0
   * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
@@ -85,12 +90,64 @@
 
         </div>
       </div>
-
-
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
+
+<!-- ======= TABLE AND LEAFLET ======= -->
+<div id = middle>
+        <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200">
+          
+          <div class="container">
+            
+            <div class="row">
+              <div class="col-lg-2">
+    
+              </div>
+    
+              <div class="col-lg-12 d-flex flex-column justify-content-center p-5">
+    
+                <table class="table table-sm" style="font-size: 10px;">
+                  <thead>
+                    <tr>
+                      <th scope="col">Zip Code</th>
+                      <th scope="col">City</th>
+                      <th scope="col">State</th>
+                      <th scope="col">Real Estate</th>
+                      <th scope="col">Income per Capita</th>
+                      <th scope="col">Median Age Male</th>
+                      <th scope="col">Median Age Female</th>
+                      <th scope="col">Bachelor's Degree</th>
+                      <th scope="col">Public Transportation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">#</th>
+                      <td>#</td>
+                      <td>#</td>
+                      <td>#</td>
+                      <td>#</td>
+                      <td>#</td>
+                      <td>#</td>
+                      <td>#</td>
+                      <td>#</td>
+                    </tr>
+                  </tbody>
+                </table>
+  
+                <div id ="map" style="width: 95%; height: 100%; padding: 150px; margin: 15px; position: center"></div>
+  
+              </div>
+            </div>
+    
+          </div>
+        
+  
+        </section>
+      </div>
+        <!-- TABLE AND LEAFLET -->  
 
     <!-- ======= Services Section ======= -->
     <section class="services">
@@ -264,21 +321,35 @@
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="../static/vendor/jquery/jquery.min.js"></script>
-  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../static/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="../static/vendor/php-email-form/validate.js"></script>
-  <script src="../static/vendor/venobox/venobox.min.js"></script>
-  <script src="../static/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="../static/vendor/counterup/counterup.min.js"></script>
-  <script src="../static/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="../static/vendor/aos/aos.js"></script>
+    <!-- API key -->
+    <script type="text/javascript" src="../static/js/config.js"></script>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" 
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" 
+    crossorigin=""></script>
+  
+    <!-- D3 CDN -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    
+    <!-- JS -->
+    <script type="text/javascript" src="../static/js/ML_map.js"></script>
 
-  <!-- Template Main JS File -->
-  <script src="../static/js/main.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="../static/vendor/jquery/jquery.min.js"></script>
+    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="../static/vendor/php-email-form/validate.js"></script>
+    <script src="../static/vendor/venobox/venobox.min.js"></script>
+    <script src="../static/vendor/waypoints/jquery.waypoints.min.js"></script>
+    <script src="../static/vendor/counterup/counterup.min.js"></script>
+    <script src="../static/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../static/vendor/aos/aos.js"></script>
 
-</body>
+    <!-- Template Main JS File -->
+    <script src="../static/js/main.js"></script>
+
+  </body>
 
 </html>
