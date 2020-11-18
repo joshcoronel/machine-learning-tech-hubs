@@ -148,7 +148,7 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Features</h2>
+          <h2>Technical Details</h2>
           <p>We are set out to find the next major Tech Hub in the United State to move your startup! This is how we built a machine learning algorithm to achieve this: </p>
         </div>
         <div class="row" data-aos="fade-up">
@@ -198,9 +198,9 @@
             <h3>Supervised Learning with the Logistical Regression Model</h3>
             <ul>
               <li><i class="icofont-check"></i> Determined cluster 4 as our definition for a tech hub</li>
-              <li><i class="icofont-check"></i> Pulled CSV with cluster predictions from our K-means model </li>
-              <li><i class="icofont-check"></i> Defined our x, y variables and split our test and training data </li>
-              <li><i class="icofont-check"></i> Ran unsupervised prediction and determined training scores </li>
+              <li><i class="icofont-check"></i> Defined our X, y variables using K-means clusters and split into test </li>
+              <li><i class="icofont-check"></i> Predicts with 95% accuracy </li>
+              <li><i class="icofont-check"></i> Serialized machine learning model in a .pickle file </li>
               <p>
                We imported the cluster_predict.csv and made a new column where all rows with cluster for would equal to one and all else would equal to zero. We then defined x as the variables we wanted to use for the prediction and y as the binary cluster column. We then split our test and training model, choosing the test size to be 30% of our data. Next, we fit and trained the model and produced a training and testing score of 95%.
             </p>
@@ -215,15 +215,15 @@
           <div class="col-md-7 pt-5 order-2 order-md-1">
             <h3>Database Loading and Flask Development</h3>
             <ul>
-              <li><i class="icofont-check"></i> Data was gathered from Zillow and US Census Bureau using their APIs</li>
-              <li><i class="icofont-check"></i> Cleaned and sorted data was merged using a Zip Code as the primary key </li>
-              <li><i class="icofont-check"></i> All data was loaded onto a Public AWS S3 bucket for use remotely</li>
-              <li><i class="icofont-check"></i> ETL process was completed using Pandas</li>
+              <li><i class="icofont-check"></i> Deployed app through Heroku </li>
+              <li><i class="icofont-check"></i> Deserializes machine learning model </li>
+              <li><i class="icofont-check"></i> Requests feature values from AWS S3 bucket based on use input</li>
+              <li><i class="icofont-check"></i> Predicts startup fit and displays to user</li>
              <p>
-               Data from the Census Bureau was gathered based on certain features we wanted to explore along with data on real estate prices from Zillow.
-               After the transforming of each individual dataframe, we merged both tables on their zip codes to create one final table which we used for our 
-               machine learning algorithms. The aim was to make things automatic for the Front-End users so updating details in the future would be as simple 
-               as updating the files within our AWS S3 Buckets. All data used was for the year 2018 as this was the current information available.    
+               With goals of deploying the app through Heroku, we used Flask as a web framework. With Flask native to Python, the program can deserialize the
+               Logistical Regresion machine learning algorithm to make predictions based on the user's input. After the user enters a zip code, the data on 
+               the location is pulled from AWS and fed into the algorithm to predict the viability of a start up in the user entered location. Results are then 
+               presented to the user. We also aim to link the results to a leaflet plot to drill down into more data to help the user understand the results. 
              </p>
           </ul>
           </div>
