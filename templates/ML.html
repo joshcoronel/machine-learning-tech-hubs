@@ -111,9 +111,8 @@
                 <table class="table table-sm" style="font-size: 10px;">
                   <thead>
                     <tr>
-                      <th scope="col">Zip Code</th>
-                      <th scope="col">City</th>
-                      <th scope="col">State</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">City,State</th>
                       <th scope="col">Real Estate</th>
                       <th scope="col">Income per Capita</th>
                       <th scope="col">Median Age Male</th>
@@ -124,15 +123,14 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">#</th>
-                      <td>#</td>
-                      <td>#</td>
-                      <td>#</td>
-                      <td>#</td>
-                      <td>#</td>
-                      <td>#</td>
-                      <td>#</td>
-                      <td>#</td>
+                      <th scope="row">{{ prediction_text[0] }}</th>
+                      <td>{{ prediction_text[1] }}</td>
+                      <td>{{ prediction_text[2] }}</td>
+                      <td>{{ prediction_text[3] }}</td>
+                      <td>{{ prediction_text[6] }}</td>
+                      <td>{{ prediction_text[6] }}</td>
+                      <td>{{ prediction_text[4] }}</td>
+                      <td>{{ prediction_text[5] }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -155,8 +153,6 @@
 
         <div class="section-title">
           <h2>Features</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
 
         <div class="row" data-aos="fade-up">
           <div class="col-md-5">
