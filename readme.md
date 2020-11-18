@@ -1,30 +1,18 @@
 Welcome to our App!
 ===================
 
-[Tech Hub Website](https://tech-hub-wars.herokuapp.com/)
+[Tech Hub Website](https://tech-hub-predictor.herokuapp.com/)
 --------------------------------------------------------
 
  
 
-Project Proposal
+Project Outline
 ----------------
 
-Our team set out to identify the factors that contribute to the success of
-existing tech cities in the United States with the long-term goal of finding the
-next emerging tech hub. In tackling this project, we analyzed the following
-well-known tech hubs:
+Our group set out to develop a machine learning model that can predict whether a zip code is a tech hub or not. 
 
--   San Francisco, California
-
--   Chicago, Illonois
-
--   New York City, New York
-
--   Austin, Texas
-
--   Atlanta Georgia
-
-We selected the following features to analyze:
+Data Sources
+----------------
 
 -   [Census report
     API](https://github.com/censusreporter/census-api/blob/master/API.md) (Age,
@@ -33,9 +21,6 @@ We selected the following features to analyze:
 -   [Zillow API](https://www.zillow.com/howto/api/APIOverview.htm) (Real estate
     data)
 
--   FBI (criminal activity)
-
- 
 
 Gathering data
 --------------
@@ -49,69 +34,52 @@ unsupervised learning model.
 
  
 
-Data Manipulation
+Data Wrangling
 -----------------
 
-PySpark is used to manipulate the data into setting each of the rows to a region
-and the columns into the features identified above.
+Used Pandas for ETL. Cleaned the data, and gathered the specific features that we wanted. Merged the census and zillow dataframes, using zip code as our key. 
 
  
 
-Machine Learnings
+Machine Learning
 -----------------
 
 Unsupervised k-mean machine learning
 
-1.  Create clusters (5-15) of NYC data to define the parameters of a tech hub.
-    This will serve as a training set
+1.  Created five clusters, using the elbow method, to define the parameters of a tech hub.
+    This served as our training set.
 
-2.  Create a new column to identify the location as a tech hub or not
+2.  Analyzed each cluster to determine which cluster we would use to determine tech hub   viability.
+
+3.  Created a new column to identify the zip codes as a tech hub or not.
 
 Supervised logistic regression machine learning:
 
-1.  Split NYC data into training and testing sets
+1.  Split data into training and testing sets.
 
-2.  Train a logistical regression model based on outputs defined from our
+2.  Trained a logistical regression model based on outputs defined from our
     unsupervised machine learning model.
 
-3.  Use this model to predict which locations across the US are tech hubs
+3.  Used this model to predict which locations across the US are tech hubs
 
-4.  Export trained logistical training model?
+4.  Exported trained logistical model through pickle in order to run our model through flask application
 
  
 
 Data Loading
 ------------
 
-From here, all the data was loaded in an AWS database.
+From here, all the data was loaded in an AWS database by creating an S3 bucket. This allows for our data to be stored remotely, which allows for anybody to run our model without needing to download all the data locally. 
 
- 
+Then, using a provided API which we used on our Flask app 
 
-Data Visualization
-------------------
 
-### Leaflet.js Map
 
-#### Choropleth Layer
+Flask Application 
+------------
 
-The geojson for each neighborhood was merged with a data frame. This data was
-used to plot a choropleth overlay on Leaflet.
 
-1.  Predicted tech hubs (indicated by color on the map)
+Depolyment 
+------------
 
-2.  Toggle/dropdown to map data for each machine learning feature with a color
-    spectrum (Age, education, ethnicity, salary, real estate)
-
- 
-
-#### Interactions
-
--   Clusters
-
--   Markers
-
--   Drop down
-
--   Toggle Later
-
- 
+Once the website was running as intended, we depoloyed our application through Heroku 
