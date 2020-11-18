@@ -80,7 +80,7 @@
           <h2 class="animate__animated animate__fadeInDown">Tech Hub <span>Prediction</span></h2>
           <form class="animate__animated animate__fadeInUp" action="{{ url_for('predict')}}"method="POST">
             <input class="animate__animated animate__fadeInUp" type="text" name="zipcode input" placeholder="Zipcode Input" required="required" />
-          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Submit</a>
+            <a class="btn-get-started animate__animated animate__fadeIn" onClick="document.getElementById('middle').scrollIntoView({behavior: 'smooth'});">Submit</a>
           <br>
           <p style= "color:white">
             {% for result in prediction_text %}
