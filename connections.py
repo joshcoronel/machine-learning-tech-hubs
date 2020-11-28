@@ -1,15 +1,22 @@
 import sys
+import os
 import pandas as pd
 import pymongo
 import csv
 import json
-from config import jc_mongo_username, jc_mongo_password
 from pymongo import MongoClient
 from flask import Flask, jsonify, render_template
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Access environment variables
+username = os.getenv("jc_mongo_username")
+password = os.getenv("jc_mongo_password")
 
 #cloud mongo connect
 cloudMClnt = MongoClient()
-cloudMClnt = MongoClient("mongodb+srv://" + jc_mongo_username + ":" + jc_mongo_password + "@techdata.hvqxz.mongodb.net/<dbname>?retryWrites=true&w=majority")
+cloudMClnt = MongoClient("mongodb+srv://" + username + ":" + password + "@techdata.hvqxz.mongodb.net/<dbname>?retryWrites=true&w=majority")
 
 def cloud_collection(database, collection):
     # Read mongo database 

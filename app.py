@@ -8,8 +8,6 @@ import pandas as pd
 import numpy as np
 import os 
 
-port = int(os.environ.get('PORT', 5000)) 
-#app.run(host='0.0.0.0', port=port)
 
 # We create a Flask app and deserialize the machine learning model 
 app = Flask(__name__)
@@ -86,4 +84,3 @@ def read():
 # More info - https://docs.python.org/3/library/__main__.html
 if __name__ == '__main__':
     app.run(debug=True)
-    #app.run(host='0.0.0.0', port=port)
