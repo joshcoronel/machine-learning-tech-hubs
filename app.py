@@ -78,7 +78,7 @@ def jobs():
 @app.route("/readData")
 def read():
     # Replace arguments with the name of your database and collection on mongodb
-    db_df = readMongoCloud("techjobs","techjobs")
+    db_df = readMongoCloud("bls","tech_jobs")
     return jsonify(db_df.to_dict('records'))
 
 # Get setup so that if we call the app directly (and it isn't being imported elsewhere)
