@@ -1,6 +1,5 @@
 
 ////////////////////////MAP CONTAINER///////////////////////////////////////////////
-
 function crime_map(coordinates) {
 
   var map = L.map("map", {
@@ -15,7 +14,7 @@ function crime_map(coordinates) {
       maxZoom: 20,
       zoomOffset: -1,
       id: "mapbox/streets-v11",
-      accessToken: process.env.API_KEY
+      accessToken: "pk.eyJ1Ijoiam9zaHVham9ubWUiLCJhIjoiY2tmcHlyeTllMDBsdjJzcWw5MnJtYnF2dSJ9.dyS8tMHNg1m8QpV3_eAwOA"
   }).addTo(map);
   return map
 }
@@ -207,7 +206,7 @@ d3.json(geoData, function (data) {
       //attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
       maxZoom: 18,
       id: "dark-v10",
-      accessToken: process.env.API_KEY
+      accessToken: "pk.eyJ1Ijoiam9zaHVham9ubWUiLCJhIjoiY2tmcHlyeTllMDBsdjJzcWw5MnJtYnF2dSJ9.dyS8tMHNg1m8QpV3_eAwOA"
   });
 
   var standard = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -216,7 +215,7 @@ d3.json(geoData, function (data) {
       maxZoom: 20,
       zoomOffset: -1,
       id: "mapbox/streets-v11",
-      accessToken: process.env.API_KEY
+      accessToken: "pk.eyJ1Ijoiam9zaHVham9ubWUiLCJhIjoiY2tmcHlyeTllMDBsdjJzcWw5MnJtYnF2dSJ9.dyS8tMHNg1m8QpV3_eAwOA"
   });
 
   // Only one base layer can be shown at a time
