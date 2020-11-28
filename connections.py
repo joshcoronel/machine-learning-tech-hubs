@@ -46,5 +46,3 @@ def readMongoCloud(database,collection):
 
 # # Run to load data
 #load_csv('static/data/tech_job_data/techjobs.csv',"techjobs", "techjobs")
-df = readMongoCloud("bls","tech_jobs")
-print(df.head())
