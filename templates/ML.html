@@ -28,6 +28,11 @@
   <!-- Template Main CSS File -->
   <link href="../static/css/style.css" rel="stylesheet">
 
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" 
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" 
+  crossorigin="" />
+
   <!-- =======================================================
   * Template Name: Moderna - v2.1.0
   * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
@@ -43,14 +48,14 @@
     <div class="container">
 
       <div class="logo float-left">
-        <h1 class="text-light"><a href="/"><span>Cyberstates</span></a></h1>
+        <h1 class="text-light"><a href="/"><span>NextTech</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav class="nav-menu float-right d-none d-lg-block">
         <ul>
-          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="team">Team</a></li>
           <li class="drop-down"><a href="">Interactive Data</a>
             <ul>
@@ -58,7 +63,7 @@
               <li><a href="techjobs">Trending Tech Occupations</a></li>
             </ul>
           </li>
-          <li><a href="ML">Machine Learning</a></li>
+          <li class="active"><a href="#">Machine Learning</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 
@@ -75,8 +80,11 @@
           <h2 class="animate__animated animate__fadeInDown">Tech Hub <span>Prediction</span></h2>
           <form class="animate__animated animate__fadeInUp" action="{{ url_for('predict')}}"method="POST">
             <input class="animate__animated animate__fadeInUp" type="text" name="zipcode input" placeholder="Zipcode Input" required="required" />
-          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Submit</a>
-          <br>
+            <!-- <a class="btn-get-started animate__animated animate__fadeIn" onClick="document.getElementById('middle').scrollIntoView({behavior: 'smooth'});">Submit</a> -->
+            <button type="submit" class="btn-get-started animate__animated animate__fadeIn">
+              Check Status
+            </button>
+            <br>
           <p style= "color:white">
             {% for result in prediction_text %}
             {{ result }}<br>
@@ -85,159 +93,141 @@
 
         </div>
       </div>
-
-
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
 
-    <!-- ======= Services Section ======= -->
-    <section class="services">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
-            <div class="icon-box icon-box-pink">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+<!-- ======= TABLE AND LEAFLET ======= -->
+<div id = middle>
+        <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200">
+          
+          <div class="container">
+            
+            <div class="row">
+              <div class="col-lg-2">
+    
+              </div>
+    
+              <div class="col-lg-12 d-flex flex-column justify-content-center p-5">
+    
+                <table class="table table-sm" style="font-size: 10px;">
+                  <thead>
+                    <tr>
+                      <th scope="col">Status</th>
+                      <th scope="col">City,State</th>
+                      <th scope="col">Real Estate</th>
+                      <th scope="col">Income per Capita</th>
+                      <th scope="col">Bachelor's Degree</th>
+                      <th scope="col">Public Transportation</th>
+                      <th scope="col">Median Age Female</th>
+                      <th scope="col">Median Age Male</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      {% for result in prediction_text %}
+                      <td>{{ result }}</td>
+                      {% endfor %}
+                    </tr>
+                  </tbody>
+                </table>
+  
+                <div id ="map" style="width: 95%; height: 100%; padding: 150px; margin: 15px; position: center"></div>
+  
+              </div>
             </div>
+    
           </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon-box icon-box-cyan">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon-box icon-box-green">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon-box icon-box-blue">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-            </div>
-          </div>
-
-        </div>
-
+        
+  
+        </section>
       </div>
-    </section><!-- End Services Section -->
+        <!-- TABLE AND LEAFLET -->  
 
-    <!-- ======= Why Us Section ======= -->
-    <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-lg-6 video-box">
-            <img src="../static/img/why-us.jpg" class="img-fluid" alt="">
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
-          </div>
-
-          <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
-
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-fingerprint"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-            </div>
-
-            <div class="icon-box">
-              <div class="icon"><i class="bx bx-gift"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Why Us Section -->
-
-    <!-- ======= Features Section ======= -->
+    <!-- ======= Our Process Section ======= -->
     <section class="features">
       <div class="container">
 
         <div class="section-title">
-          <h2>Features</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>Technical Details</h2>
+          <p>We are set out to find the next major Tech Hub in the United State to move your startup! This is how we built a machine learning algorithm to achieve this: </p>
         </div>
-
         <div class="row" data-aos="fade-up">
           <div class="col-md-5">
-            <img src="../static/img/features-1.svg" class="img-fluid" alt="">
+            <img src="../static/img/Capture.png" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 pt-4">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
-            <p class="font-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
+            <h3>Data Sourcing and Cleaning</h3>
             <ul>
-              <li><i class="icofont-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="icofont-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+                <li><i class="icofont-check"></i> Gathered data from Zillow and US Census Bureau using their public web APIs</li>
+                <li><i class="icofont-check"></i> Cleaned and sorted data was merged using a Zip Code as the primary key </li>
+                <li><i class="icofont-check"></i> Loaded all data was onto a Public AWS S3 bucket for use remotely</li>
+                <li><i class="icofont-check"></i> ETL process completed using Pandas</li>
+               <p>
+                 All data was sourced from Zillow and the US Census Bureau across different features we identified as potential factors impacting start up potential.
+                 These factors included but not limited to real estate value, age, income, and education. All this data was gathered for every zipcode across the US.
+                 After the transforming of each individual dataframe, we merged both Zillow and Census tables on their zip codes to create one final table which we used for our 
+                 machine learning algorithms. Our future goal is to make this data loading and manipulation automatic so that updating details in the future would be as simple 
+                 as updating the files within our AWS S3 Buckets. Currently, all sourced data is from the year 2018.    
+               </p>
             </ul>
           </div>
         </div>
 
         <div class="row" data-aos="fade-up">
           <div class="col-md-5 order-1 order-md-2">
-            <img src="../static/img/features-2.svg" class="img-fluid" alt="">
+            <img src="../static/img/k-means.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 pt-5 order-2 order-md-1">
-            <h3>Corporis temporibus maiores provident</h3>
-            <p class="font-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+            <h3>Unsupervised Learning with the K-Means Model</h3>
+            <ul>
+              <li><i class="icofont-check"></i> Removed string data or non-prediction data variables</li>
+              <li><i class="icofont-check"></i> Determined optimal number of clusters through the "Elbow Method"</li>
+              <li><i class="icofont-check"></i> Initialized K-means model with 5 clusters</li>
+              <p>
+                We imported the master.csv file containing all the state data and dropped columns containing strings (e.g. State, City, CountyName), leaving only our tech hub features and the numerical zipcode. Then, we assessed the data and removed any rows that contained any null values. Beginning the modeling process, we scaled our featured using MinMaxScaler(), fit our data and initialized the k-means model. To determine the amount of clusters that would be best for our dataset, we used the elbow method - where we choose on the graph the x-value along the elbow of the graph on what the cluster value would be. Lastly, we exported our clusters into a csv file for analysis.
             </p>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
-            </p>
+          </ul>
           </div>
         </div>
 
         <div class="row" data-aos="fade-up">
           <div class="col-md-5">
-            <img src="../static/img/features-3.svg" class="img-fluid" alt="">
+            <img src="../static/img/logreg.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 pt-5">
-            <h3>Sunt consequatur ad ut est nulla consectetur reiciendis animi voluptas</h3>
-            <p>Cupiditate placeat cupiditate placeat est ipsam culpa. Delectus quia minima quod. Sunt saepe odit aut quia voluptatem hic voluptas dolor doloremque.</p>
+            <h3>Supervised Learning with the Logistical Regression Model</h3>
             <ul>
-              <li><i class="icofont-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="icofont-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="icofont-check"></i> Facilis ut et voluptatem aperiam. Autem soluta ad fugiat.</li>
-            </ul>
+              <li><i class="icofont-check"></i> Determined cluster 4 as our definition for a tech hub</li>
+              <li><i class="icofont-check"></i> Defined our X, y variables using K-means clusters and split into test and training groups</li>
+              <li><i class="icofont-check"></i> Predicts with 95% accuracy </li>
+              <li><i class="icofont-check"></i> Serialized machine learning model in a .pickle file </li>
+              <p>
+               We imported the cluster_predict.csv and made a new column where all rows with cluster for would equal to one and all else would equal to zero. We then defined x as the variables we wanted to use for the prediction and y as the binary cluster column. We then split our test and training model, choosing the test size to be 30% of our data. Next, we fit and trained the model and produced a training and testing score of 95%.
+            </p>
+          </ul>
           </div>
         </div>
 
         <div class="row" data-aos="fade-up">
           <div class="col-md-5 order-1 order-md-2">
-            <img src="../static/img/features-4.svg" class="img-fluid" alt="">
+            <img src="../static/img/pickle.JPG" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 pt-5 order-2 order-md-1">
-            <h3>Quas et necessitatibus eaque impedit ipsum animi consequatur incidunt in</h3>
-            <p class="font-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
-            </p>
+            <h3>Database Loading and Flask Development</h3>
+            <ul>
+              <li><i class="icofont-check"></i> Deployed app through Heroku </li>
+              <li><i class="icofont-check"></i> Deserializes machine learning model </li>
+              <li><i class="icofont-check"></i> Requests feature values from AWS S3 bucket based on use input</li>
+              <li><i class="icofont-check"></i> Predicts startup fit and displays to user</li>
+             <p>
+               With goals of deploying the app through Heroku, we used Flask as a web framework. With Flask native to Python, the program can deserialize the
+               Logistical Regresion machine learning algorithm to make predictions based on the user's input. After the user enters a zip code, the data on 
+               the location is pulled from AWS and fed into the algorithm to predict the viability of a start up in the user entered location. Results are then 
+               presented to the user. We also aim to link the results to a leaflet plot to drill down into more data to help the user understand the results. 
+             </p>
+          </ul>
           </div>
         </div>
 
@@ -263,22 +253,32 @@
 </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" 
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" 
+    crossorigin=""></script>
+  
+    <!-- D3 CDN -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    
+    <!-- JS -->
+    <script type="text/javascript" src="../static/js/ML_map.js"></script>
 
-  <!-- Vendor JS Files -->
-  <script src="../static/vendor/jquery/jquery.min.js"></script>
-  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../static/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="../static/vendor/php-email-form/validate.js"></script>
-  <script src="../static/vendor/venobox/venobox.min.js"></script>
-  <script src="../static/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="../static/vendor/counterup/counterup.min.js"></script>
-  <script src="../static/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="../static/vendor/aos/aos.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="../static/vendor/jquery/jquery.min.js"></script>
+    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="../static/vendor/php-email-form/validate.js"></script>
+    <script src="../static/vendor/venobox/venobox.min.js"></script>
+    <script src="../static/vendor/waypoints/jquery.waypoints.min.js"></script>
+    <script src="../static/vendor/counterup/counterup.min.js"></script>
+    <script src="../static/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../static/vendor/aos/aos.js"></script>
 
-  <!-- Template Main JS File -->
-  <script src="../static/js/main.js"></script>
+    <!-- Template Main JS File -->
+    <script src="../static/js/main.js"></script>
 
-</body>
+  </body>
 
 </html>
