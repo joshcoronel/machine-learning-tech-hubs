@@ -1,16 +1,11 @@
 # We import Flask
 from flask import Flask, request, render_template, jsonify
-import json
 from pymongo import MongoClient
 from connections import readMongoCloud
 import pickle
 import pandas as pd
 import numpy as np
-from dotenv import load_dotenv
-import os 
-
-# Set env vars
-load_dotenv()
+import os
 
 # We create a Flask app and deserialize the machine learning model 
 app = Flask(__name__)
