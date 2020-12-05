@@ -1,11 +1,11 @@
 # We import Flask
 from flask import Flask, request, render_template, jsonify
-import json
 from pymongo import MongoClient
 from connections import readMongoCloud
-import pickle
 import pandas as pd
 import numpy as np
+import pickle
+import json
 import os 
 
 

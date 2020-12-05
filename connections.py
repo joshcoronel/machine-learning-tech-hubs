@@ -1,12 +1,10 @@
 import sys
 import os
 import pandas as pd
-import pymongo
 import csv
-import json
 from pymongo import MongoClient
-from flask import Flask, jsonify, render_template
 from dotenv import load_dotenv
+import boto3
 
 load_dotenv()
 
