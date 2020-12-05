@@ -39,3 +39,6 @@ Thumbs.db
 
 # Machine Learning
 debug.log
+
+# Jupter Notebook
+.ipynb_checkpoints
