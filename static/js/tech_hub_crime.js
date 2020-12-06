@@ -11,13 +11,23 @@ function BuildDropDown() {
     map.panTo(coordinates[selection])
   }
 
+  //Top 20 Tech Hubs based on data from CompTIA 
 coordinates = {
-    "nyc": [40.730610, -73.935242],
-    "austin": [30.2672, -97.7431],
-    "san francisco": [37.7749, -122.4194],
-    "chicago": [41.8781, -87.6298]
+    "Austin, TX": [30.2672,-97.7431],
+    "Dallas, TX":[32.7762719,-96.7968559],
+    "Raleigh, NC":[35.7803977,-78.6390989],
+    "San Jose, CA":[37.3361905,-121.890583],
+    "Charlotte, NC":[35.2272086,-80.8430827],
+    "Seattle, WA":[47.6038321,-122.3300624],
+    "San Francisco, CA":[37.7749,-122.4194],
+    "Atlanta, GA":[33.7489924,-84.3902644],
+    "Huntsville, AL":[34.729847,-86.5859011],
+    "Denver, CO":[39.7392364,-104.9848623],
+    "New York, NY":[40.7127281,-74.0060152],
+    "Boston, MA":[42.3602534,-71.0582912],
+    "Trenton, NJ":[40.2170575,-74.7429463],
   };
-  
+
 ////////////////////////MAP CONTAINER///////////////////////////////////////////////
 function default_map(coordinates) {
 
@@ -38,7 +48,7 @@ function default_map(coordinates) {
     return map
   }
 
-var map = default_map(coordinates["nyc"])
+var map = default_map(coordinates["San Francisco, CA"])
 
 ///////////////////////////////CHLOROPLETH LAYER///////////////////////////////////
 
