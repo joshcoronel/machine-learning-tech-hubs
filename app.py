@@ -1,15 +1,11 @@
 # We import Flask
 from flask import Flask, request, render_template, jsonify
-import json
 from pymongo import MongoClient
 from connections import readMongoCloud
 import pickle
 import pandas as pd
 import numpy as np
-import os 
-
-port = int(os.environ.get('PORT', 5000)) 
-#app.run(host='0.0.0.0', port=port)
+import os
 
 # We create a Flask app and deserialize the machine learning model 
 app = Flask(__name__)
@@ -44,7 +40,7 @@ def predict():
         else:
             output = "No"
 
-        results = [f"Tech hub status: {output}", f"{city}, {state}", f"Average Real Estate: ${final_features[0]}",f"Income per capita: ${final_features[1]}",f"Percentage of Population with Bachelors: {round(100*final_features[4],2)}%", f"Percentage of population that use public transportation: {round(100*final_features[5],2)}%", f"Median age - Female: {final_features[2]} Male: {final_features[3]}"] 
+        results = [f"Move your next start up here? {output}!", f"{city}, {state} {zipcode[0]}", f"Average Real Estate: ${final_features[0]}",f"Income per capita: ${final_features[1]}",f"Percentage of Population with Bachelors: {round(100*final_features[4],2)}%", f"Percentage of population that use public transportation: {round(100*final_features[5],2)}%", f"Median Age Female: {final_features[2]}", f"Median Age Male: {final_features[3]}"] 
     else:
         results = ["Invalid zip code. Try again."]
 
@@ -78,7 +74,7 @@ def jobs():
 @app.route("/readData")
 def read():
     # Replace arguments with the name of your database and collection on mongodb
-    db_df = readMongoCloud("techjobs","techjobs")
+    db_df = readMongoCloud("bls","tech_jobs")
     return jsonify(db_df.to_dict('records'))
 
 # Get setup so that if we call the app directly (and it isn't being imported elsewhere)
@@ -86,4 +82,3 @@ def read():
 # More info - https://docs.python.org/3/library/__main__.html
 if __name__ == '__main__':
     app.run(debug=True)
-    #app.run(host='0.0.0.0', port=port)

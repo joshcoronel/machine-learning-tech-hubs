@@ -48,14 +48,14 @@
     <div class="container">
 
       <div class="logo float-left">
-        <h1 class="text-light"><a href="/"><span>Cyberstates</span></a></h1>
+        <h1 class="text-light"><a href="/"><span>NextTech</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav class="nav-menu float-right d-none d-lg-block">
         <ul>
-          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="team">Team</a></li>
           <li class="drop-down"><a href="">Interactive Data</a>
             <ul>
@@ -63,7 +63,7 @@
               <li><a href="techjobs">Trending Tech Occupations</a></li>
             </ul>
           </li>
-          <li><a href="ML">Machine Learning</a></li>
+          <li class="active"><a href="#">Machine Learning</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 
@@ -80,8 +80,11 @@
           <h2 class="animate__animated animate__fadeInDown">Tech Hub <span>Prediction</span></h2>
           <form class="animate__animated animate__fadeInUp" action="{{ url_for('predict')}}"method="POST">
             <input class="animate__animated animate__fadeInUp" type="text" name="zipcode input" placeholder="Zipcode Input" required="required" />
-            <a class="btn-get-started animate__animated animate__fadeIn" onClick="document.getElementById('middle').scrollIntoView({behavior: 'smooth'});">Submit</a>
-          <br>
+            <!-- <a class="btn-get-started animate__animated animate__fadeIn" onClick="document.getElementById('middle').scrollIntoView({behavior: 'smooth'});">Submit</a> -->
+            <button type="submit" class="btn-get-started animate__animated animate__fadeIn">
+              Check Status
+            </button>
+            <br>
           <p style= "color:white">
             {% for result in prediction_text %}
             {{ result }}<br>
@@ -115,22 +118,17 @@
                       <th scope="col">City,State</th>
                       <th scope="col">Real Estate</th>
                       <th scope="col">Income per Capita</th>
-                      <th scope="col">Median Age Male</th>
-                      <th scope="col">Median Age Female</th>
                       <th scope="col">Bachelor's Degree</th>
                       <th scope="col">Public Transportation</th>
+                      <th scope="col">Median Age Female</th>
+                      <th scope="col">Median Age Male</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">{{ prediction_text[0] }}</th>
-                      <td>{{ prediction_text[1] }}</td>
-                      <td>{{ prediction_text[2] }}</td>
-                      <td>{{ prediction_text[3] }}</td>
-                      <td>{{ prediction_text[6] }}</td>
-                      <td>{{ prediction_text[6] }}</td>
-                      <td>{{ prediction_text[4] }}</td>
-                      <td>{{ prediction_text[5] }}</td>
+                      {% for result in prediction_text %}
+                      <td>{{ result }}</td>
+                      {% endfor %}
                     </tr>
                   </tbody>
                 </table>
@@ -152,8 +150,9 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Features</h2>
-
+          <h2>Technical Details</h2>
+          <p>We are set out to find the next major Tech Hub in the United State to move your startup! This is how we built a machine learning algorithm to achieve this: </p>
+        </div>
         <div class="row" data-aos="fade-up">
           <div class="col-md-5">
             <img src="../static/img/Capture.png" class="img-fluid" alt="">
@@ -161,15 +160,16 @@
           <div class="col-md-7 pt-4">
             <h3>Data Sourcing and Cleaning</h3>
             <ul>
-                <li><i class="icofont-check"></i> Data was gathered from Zillow.com and US Census Bureau using their APIs</li>
+                <li><i class="icofont-check"></i> Gathered data from Zillow and US Census Bureau using their public web APIs</li>
                 <li><i class="icofont-check"></i> Cleaned and sorted data was merged using a Zip Code as the primary key </li>
-                <li><i class="icofont-check"></i> All data was loaded onto a Public AWS S3 bucket for use remotely</li>
-                <li><i class="icofont-check"></i> ETL process was completed using Pandas</li>
+                <li><i class="icofont-check"></i> Loaded all data was onto a Public AWS S3 bucket for use remotely</li>
+                <li><i class="icofont-check"></i> ETL process completed using Pandas</li>
                <p>
-                 Data from the Census Bureau was gathered based on certain features we wanted to explore along with data on real estate prices from Zillow.
-                 After the transforming of each individual dataframe, we merged both tables on their zip codes to create one final table which we used for our 
-                 machine learning algorithms. The aim was to make things automatic for the Front-End users so updating details in the future would be as simple 
-                 as updating the files within our AWS S3 Buckets. All data used was for the year 2018 as this was the current information available.    
+                 All data was sourced from Zillow and the US Census Bureau across different features we identified as potential factors impacting start up potential.
+                 These factors included but not limited to real estate value, age, income, and education. All this data was gathered for every zipcode across the US.
+                 After the transforming of each individual dataframe, we merged both Zillow and Census tables on their zip codes to create one final table which we used for our 
+                 machine learning algorithms. Our future goal is to make this data loading and manipulation automatic so that updating details in the future would be as simple 
+                 as updating the files within our AWS S3 Buckets. Currently, all sourced data is from the year 2018.    
                </p>
             </ul>
           </div>
@@ -200,9 +200,9 @@
             <h3>Supervised Learning with the Logistical Regression Model</h3>
             <ul>
               <li><i class="icofont-check"></i> Determined cluster 4 as our definition for a tech hub</li>
-              <li><i class="icofont-check"></i> Pulled CSV with cluster predictions from our K-means model </li>
-              <li><i class="icofont-check"></i> Defined our x, y variables and split our test and training data </li>
-              <li><i class="icofont-check"></i> Ran unsupervised prediction and determined training scores </li>
+              <li><i class="icofont-check"></i> Defined our X, y variables using K-means clusters and split into test and training groups</li>
+              <li><i class="icofont-check"></i> Predicts with 95% accuracy </li>
+              <li><i class="icofont-check"></i> Serialized machine learning model in a .pickle file </li>
               <p>
                We imported the cluster_predict.csv and made a new column where all rows with cluster for would equal to one and all else would equal to zero. We then defined x as the variables we wanted to use for the prediction and y as the binary cluster column. We then split our test and training model, choosing the test size to be 30% of our data. Next, we fit and trained the model and produced a training and testing score of 95%.
             </p>
@@ -217,15 +217,15 @@
           <div class="col-md-7 pt-5 order-2 order-md-1">
             <h3>Database Loading and Flask Development</h3>
             <ul>
-              <li><i class="icofont-check"></i> Data was gathered from Zillow.com and US Census Bureau using their APIs</li>
-              <li><i class="icofont-check"></i> Cleaned and sorted data was merged using a Zip Code as the primary key </li>
-              <li><i class="icofont-check"></i> All data was loaded onto a Public AWS S3 bucket for use remotely</li>
-              <li><i class="icofont-check"></i> ETL process was completed using Pandas</li>
+              <li><i class="icofont-check"></i> Deployed app through Heroku </li>
+              <li><i class="icofont-check"></i> Deserializes machine learning model </li>
+              <li><i class="icofont-check"></i> Requests feature values from AWS S3 bucket based on use input</li>
+              <li><i class="icofont-check"></i> Predicts startup fit and displays to user</li>
              <p>
-               Data from the Census Bureau was gathered based on certain features we wanted to explore along with data on real estate prices from Zillow.
-               After the transforming of each individual dataframe, we merged both tables on their zip codes to create one final table which we used for our 
-               machine learning algorithms. The aim was to make things automatic for the Front-End users so updating details in the future would be as simple 
-               as updating the files within our AWS S3 Buckets. All data used was for the year 2018 as this was the current information available.    
+               With goals of deploying the app through Heroku, we used Flask as a web framework. With Flask native to Python, the program can deserialize the
+               Logistical Regresion machine learning algorithm to make predictions based on the user's input. After the user enters a zip code, the data on 
+               the location is pulled from AWS and fed into the algorithm to predict the viability of a start up in the user entered location. Results are then 
+               presented to the user. We also aim to link the results to a leaflet plot to drill down into more data to help the user understand the results. 
              </p>
           </ul>
           </div>
@@ -253,10 +253,6 @@
 </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-
-    <!-- API key -->
-    <script type="text/javascript" src="../static/js/config.js"></script>
-    
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" 
     integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" 
