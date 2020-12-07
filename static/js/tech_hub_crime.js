@@ -29,6 +29,7 @@ coordinates = {
   };
 
 ////////////////////////MAP CONTAINER///////////////////////////////////////////////
+
 function default_map(coordinates) {
 
     var map = L.map("map", {
