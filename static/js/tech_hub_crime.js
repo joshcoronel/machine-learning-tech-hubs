@@ -21,7 +21,7 @@ coordinates = {
     "Seattle, WA":[47.6038321,-122.3300624],
     "San Francisco, CA":[37.7749,-122.4194],
     "Atlanta, GA":[33.7489924,-84.3902644],
-    "Huntsville, AL":[34.729847,-86.5859011],
+    "Huntsville, Al":[34.729847,-86.5859011],
     "Denver, CO":[39.7392364,-104.9848623],
     "New York, NY":[40.7127281,-74.0060152],
     "Boston, MA":[42.3602534,-71.0582912],
@@ -48,10 +48,206 @@ function default_map(coordinates) {
     return map
   }
 
-var map = default_map(coordinates["San Francisco, CA"])
+var map = default_map(coordinates["New York, NY"])
 
 ///////////////////////////////CHLOROPLETH LAYER///////////////////////////////////
+//Layers to Add Average RE Prices, Income per Capita, Median Age Male, Median Age Female, Bachelor's Degree, Public Transportation
 
+var geoData = "../static/data/geojson/NY.geojson"; //CHANGE THIS TO THE FINAL DATA SOURCE (AWS)
+var geojson;
+
+var RealEstate = new L.LayerGroup()
+
+// Grabbing our GeoJSON data..
+d3.json(geoData, function (data) {
+    console.log(data)
+    // Create a new choropleth layer
+    geojson = L.choropleth(data, {
+  
+        // Define what  property in the features to use
+        valueProperty: "Average RE Prices", ///////////////////////CHANGE 2010-2020
+  
+        // Set color scale
+        scale: ["#ffffb2", "#b10026"],
+  
+        // Number of breaks in step range
+        steps: 10,
+  
+        // q for quartile, e for equidistant, k for k-means
+        mode: "q",
+        style: {
+            // Border color
+            color: "#fff",
+            weight: 1,
+            fillOpacity: 0.7
+        },
+        // Binding a pop-up to each layer
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("RegionName: " + feature.properties.neighborhood + "<br>Average Home Values: " +
+                "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
+        }  
+    }).addTo(RealEstate);
+});
+
+var Bach = new L.LayerGroup()
+
+// Grabbing our GeoJSON data..
+d3.json(geoData, function (data) {
+    // Create a new choropleth layer
+    geojson = L.choropleth(data, {
+  
+        // Define what  property in the features to use
+        valueProperty: "Bachelor's degree > 25", ///////////////////////CHANGE 2010-2020
+  
+        // Set color scale
+        scale: ["#ffffb2", "#b10026"],
+  
+        // Number of breaks in step range
+        steps: 10,
+  
+        // q for quartile, e for equidistant, k for k-means
+        mode: "q",
+        style: {
+            // Border color
+            color: "#fff",
+            weight: 1,
+            fillOpacity: 0.7
+        },
+        // Binding a pop-up to each layer
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("RegionName: " + feature.properties.neighborhood + "<br>Average Home Values: " +
+                "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
+        }  
+    }).addTo(Bach)
+});
+
+var MedAgeMale = new L.LayerGroup()
+
+// Grabbing our GeoJSON data..
+d3.json(geoData, function (data) {
+    // Create a new choropleth layer
+    geojson = L.choropleth(data, {
+  
+        // Define what  property in the features to use
+        valueProperty: "Median Age Male", ///////////////////////CHANGE 2010-2020
+  
+        // Set color scale
+        scale: ["#ffffb2", "#b10026"],
+  
+        // Number of breaks in step range
+        steps: 10,
+  
+        // q for quartile, e for equidistant, k for k-means
+        mode: "q",
+        style: {
+            // Border color
+            color: "#fff",
+            weight: 1,
+            fillOpacity: 0.7
+        },
+        // Binding a pop-up to each layer
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("RegionName: " + feature.properties.neighborhood + "<br>Average Home Values: " +
+                "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
+        }  
+    }).addTo(MedAgeMale)
+});
+
+var IncPerCap = new L.LayerGroup()
+
+// Grabbing our GeoJSON data..
+d3.json(geoData, function (data) {
+    // Create a new choropleth layer
+    geojson = L.choropleth(data, {
+  
+        // Define what  property in the features to use
+        valueProperty: "Income per capita", ///////////////////////CHANGE 2010-2020
+  
+        // Set color scale
+        scale: ["#ffffb2", "#b10026"],
+  
+        // Number of breaks in step range
+        steps: 10,
+  
+        // q for quartile, e for equidistant, k for k-means
+        mode: "q",
+        style: {
+            // Border color
+            color: "#fff",
+            weight: 1,
+            fillOpacity: 0.7
+        },
+        // Binding a pop-up to each layer
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("RegionName: " + feature.properties.neighborhood + "<br>Average Home Values: " +
+                "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
+        }  
+    }).addTo(IncPerCap)
+});
+
+var MedAgeFemale = new L.LayerGroup()
+
+// Grabbing our GeoJSON data..
+d3.json(geoData, function (data) {
+    // Create a new choropleth layer
+    geojson = L.choropleth(data, {
+  
+        // Define what  property in the features to use
+        valueProperty: "Median Age Female", ///////////////////////CHANGE 2010-2020
+  
+        // Set color scale
+        scale: ["#ffffb2", "#b10026"],
+  
+        // Number of breaks in step range
+        steps: 10,
+  
+        // q for quartile, e for equidistant, k for k-means
+        mode: "q",
+        style: {
+            // Border color
+            color: "#fff",
+            weight: 1,
+            fillOpacity: 0.7
+        },
+        // Binding a pop-up to each layer
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("RegionName: " + feature.properties.neighborhood + "<br>Average Home Values: " +
+                "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
+        }  
+    }).addTo(MedAgeFemale)
+});
+
+var PubTrans = new L.LayerGroup()
+
+// Grabbing our GeoJSON data..
+d3.json(geoData, function (data) {
+    // Create a new choropleth layer
+    geojson = L.choropleth(data, {
+  
+        // Define what  property in the features to use
+        valueProperty: "Public transportation", ///////////////////////CHANGE 2010-2020
+  
+        // Set color scale
+        scale: ["#ffffb2", "#b10026"],
+  
+        // Number of breaks in step range
+        steps: 10,
+  
+        // q for quartile, e for equidistant, k for k-means
+        mode: "q",
+        style: {
+            // Border color
+            color: "#fff",
+            weight: 1,
+            fillOpacity: 0.7
+        },
+        // Binding a pop-up to each layer
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("RegionName: " + feature.properties.neighborhood + "<br>Average Home Values: " +
+                "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
+        }  
+    }).addTo(PubTrans)
+});
 
 /////////////////////////////////LAYER CONTROL/////////////////////////////////////
 
@@ -90,8 +286,13 @@ var baseMaps = {
 // overlays.addTo(map);
 //Overlays that may be toggled on or off
 var overlayMaps = {
-    //'Real Estate Prices': geojson,
-    //'Crime Data': overlays
+    'Real Estate Prices': RealEstate,
+    'Bachelors Degree':Bach,
+    'Income Per Capita':IncPerCap,
+    'Median Age Male': MedAgeMale,
+    'Median Age Female':MedAgeFemale,
+    'Public Transportation':PubTrans,
 };
 L.control.layers(baseMaps, overlayMaps, {collapsed: false}).addTo(map);
+
 
