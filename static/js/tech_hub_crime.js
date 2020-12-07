@@ -35,7 +35,7 @@ function default_map(coordinates) {
         center: coordinates,
         zoom: 11
     });
-  
+    
     // Adding tile layer
     L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
         attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
@@ -56,6 +56,7 @@ var map = default_map(coordinates["New York, NY"])
 var geoData = "../static/data/geojson/NY.geojson"; //CHANGE THIS TO THE FINAL DATA SOURCE (AWS)
 var geojson;
 
+/////////////////////////////////REAL ESTATE/////////////////////////////////////
 var RealEstate = new L.LayerGroup()
 
 // Grabbing our GeoJSON data..
@@ -71,7 +72,7 @@ d3.json(geoData, function (data) {
         scale: ["#ffffb2", "#b10026"],
   
         // Number of breaks in step range
-        steps: 10,
+        steps: 6,
   
         // q for quartile, e for equidistant, k for k-means
         mode: "q",
@@ -87,8 +88,52 @@ d3.json(geoData, function (data) {
                 "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
         }  
     }).addTo(RealEstate);
+    
+    var legend = L.control({position: "bottomleft"});
+    legend.onAdd = function () {
+        var div = L.DomUtil.create("div", "info legend");
+        var limits = geojson.options.limits;
+        var colors = geojson.options.colors;
+        var labels = [];
+    
+        // Add min & max
+        var legendInfo = "<h5>Average House Value</h5>" +
+            "<div class=\"labels\">" +
+            "<div class=\"min\">" + limits[0] + "</div>" +
+            "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+            "</div>";
+    
+        div.innerHTML = legendInfo;
+    
+        limits.forEach(function (limit, index) {
+            labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+        });
+    
+        div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+        return div;
+    };
+    
+    // Adding legend to the map
+    legend.addTo(map);
+
+    map.on('overlayadd', function(eventLayer){
+        if (eventLayer.name === 'Real Estate Prices'){
+            map.addControl(legend);
+        } else if (eventLayer.name === 'Bachelors Degree') {
+            map.removeControl(legend);
+        } else if (eventLayer.name === 'Income Per Capita') {
+            map.removeControl(legend);
+        } else if (eventLayer.name === 'Median Age Male') {
+            map.removeControl(legend);
+        } else if (eventLayer.name === 'Median Age Female') {
+            map.removeControl(legend);
+        } else if (eventLayer.name === 'Public Transportation') {
+            map.removeControl(legend);
+        }
+    });
 });
 
+/////////////////////////////////BACHELOR'S DEGREE/////////////////////////////////////
 var Bach = new L.LayerGroup()
 
 // Grabbing our GeoJSON data..
@@ -103,7 +148,7 @@ d3.json(geoData, function (data) {
         scale: ["#ffffb2", "#b10026"],
   
         // Number of breaks in step range
-        steps: 10,
+        steps: 6,
   
         // q for quartile, e for equidistant, k for k-means
         mode: "q",
@@ -119,40 +164,52 @@ d3.json(geoData, function (data) {
                 "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
         }  
     }).addTo(Bach)
+
+    var legend2 = L.control({position: "bottomleft"});
+    legend2.onAdd = function () {
+        var div = L.DomUtil.create("div", "info legend");
+        var limits = geojson.options.limits;
+        var colors = geojson.options.colors;
+        var labels = [];
+    
+        // Add min & max
+        var legendInfo = "<h5>Bachelors Degree</h5>" +
+            "<div class=\"labels\">" +
+            "<div class=\"min\">" + limits[0] + "</div>" +
+            "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+            "</div>";
+    
+        div.innerHTML = legendInfo;
+    
+        limits.forEach(function (limit, index) {
+            labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+        });
+    
+        div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+        return div;
+    };
+    
+    // Adding legend to the map
+    legend2.addTo(map);
+
+    map.on('overlayadd', function(eventLayer){
+        if (eventLayer.name === 'Real Estate Prices'){
+            map.removeControl(legend2);
+        } else if (eventLayer.name === 'Bachelors Degree') {
+            map.addControl(legend2);
+        } else if (eventLayer.name === 'Income Per Capita') {
+            map.removeControl(legend2);
+        } else if (eventLayer.name === 'Median Age Male') {
+            map.removeControl(legend2);
+        } else if (eventLayer.name === 'Median Age Female') {
+            map.removeControl(legend2);
+        } else if (eventLayer.name === 'Public Transportation') {
+            map.removeControl(legend2);
+        }
+    });
 });
 
-var MedAgeMale = new L.LayerGroup()
-
-// Grabbing our GeoJSON data..
-d3.json(geoData, function (data) {
-    // Create a new choropleth layer
-    geojson = L.choropleth(data, {
-  
-        // Define what  property in the features to use
-        valueProperty: "Median Age Male", ///////////////////////CHANGE 2010-2020
-  
-        // Set color scale
-        scale: ["#ffffb2", "#b10026"],
-  
-        // Number of breaks in step range
-        steps: 10,
-  
-        // q for quartile, e for equidistant, k for k-means
-        mode: "q",
-        style: {
-            // Border color
-            color: "#fff",
-            weight: 1,
-            fillOpacity: 0.7
-        },
-        // Binding a pop-up to each layer
-        onEachFeature: function (feature, layer) {
-            layer.bindPopup("RegionName: " + feature.properties.neighborhood + "<br>Average Home Values: " +
-                "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
-        }  
-    }).addTo(MedAgeMale)
-});
-
+/////////////////////////////////INCOME PER CAPITA/////////////////////////////////////
 var IncPerCap = new L.LayerGroup()
 
 // Grabbing our GeoJSON data..
@@ -167,7 +224,7 @@ d3.json(geoData, function (data) {
         scale: ["#ffffb2", "#b10026"],
   
         // Number of breaks in step range
-        steps: 10,
+        steps: 6,
   
         // q for quartile, e for equidistant, k for k-means
         mode: "q",
@@ -183,8 +240,128 @@ d3.json(geoData, function (data) {
                 "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
         }  
     }).addTo(IncPerCap)
+
+    var legend3 = L.control({position: "bottomleft"});
+    legend3.onAdd = function () {
+        var div = L.DomUtil.create("div", "info legend");
+        var limits = geojson.options.limits;
+        var colors = geojson.options.colors;
+        var labels = [];
+    
+        // Add min & max
+        var legendInfo = "<h5>Income Per Capita</h5>" +
+            "<div class=\"labels\">" +
+            "<div class=\"min\">" + limits[0] + "</div>" +
+            "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+            "</div>";
+    
+        div.innerHTML = legendInfo;
+    
+        limits.forEach(function (limit, index) {
+            labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+        });
+    
+        div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+        return div;
+    };
+    
+    // Adding legend to the map
+    legend3.addTo(map);
+
+    map.on('overlayadd', function(eventLayer){
+        if (eventLayer.name === 'Real Estate Prices'){
+            map.removeControl(legend3);
+        } else if (eventLayer.name === 'Bachelors Degree') {
+            map.removeControl(legend3);
+        } else if (eventLayer.name === 'Income Per Capita') {
+            map.addControl(legend3);
+        } else if (eventLayer.name === 'Median Age Male') {
+            map.removeControl(legend3);
+        } else if (eventLayer.name === 'Median Age Female') {
+            map.removeControl(legend3);
+        } else if (eventLayer.name === 'Public Transportation') {
+            map.removeControl(legend3);
+        }
+    });     
 });
 
+/////////////////////////////////MEDIAN AGE MALE/////////////////////////////////////
+var MedAgeMale = new L.LayerGroup()
+
+// Grabbing our GeoJSON data..
+d3.json(geoData, function (data) {
+    // Create a new choropleth layer
+    geojson = L.choropleth(data, {
+  
+        // Define what  property in the features to use
+        valueProperty: "Median Age Male", ///////////////////////CHANGE 2010-2020
+  
+        // Set color scale
+        scale: ["#ffffb2", "#b10026"],
+  
+        // Number of breaks in step range
+        steps: 6,
+  
+        // q for quartile, e for equidistant, k for k-means
+        mode: "q",
+        style: {
+            // Border color
+            color: "#fff",
+            weight: 1,
+            fillOpacity: 0.7
+        },
+        // Binding a pop-up to each layer
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup("RegionName: " + feature.properties.neighborhood + "<br>Average Home Values: " +
+                "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
+        }  
+    }).addTo(MedAgeMale)
+
+    var legend4 = L.control({position: "bottomleft"});
+    legend4.onAdd = function () {
+        var div = L.DomUtil.create("div", "info legend");
+        var limits = geojson.options.limits;
+        var colors = geojson.options.colors;
+        var labels = [];
+    
+        // Add min & max
+        var legendInfo = "<h5>Median Age Male</h5>" +
+            "<div class=\"labels\">" +
+            "<div class=\"min\">" + limits[0] + "</div>" +
+            "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+            "</div>";
+    
+        div.innerHTML = legendInfo;
+    
+        limits.forEach(function (limit, index) {
+            labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+        });
+    
+        div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+        return div;
+    };
+    
+    // Adding legend to the map
+    legend4.addTo(map);
+
+    map.on('overlayadd', function(eventLayer){
+        if (eventLayer.name === 'Real Estate Prices'){
+            map.removeControl(legend4);
+        } else if (eventLayer.name === 'Bachelors Degree') {
+            map.removeControl(legend4);
+        } else if (eventLayer.name === 'Income Per Capita') {
+            map.removeControl(legend4);
+        } else if (eventLayer.name === 'Median Age Male') {
+            map.addControl(legend4);
+        } else if (eventLayer.name === 'Median Age Female') {
+            map.removeControl(legend4);
+        } else if (eventLayer.name === 'Public Transportation') {
+            map.removeControl(legend4);
+        }
+    });      
+});
+
+/////////////////////////////////MEDIAN AGE FEMALE/////////////////////////////////////
 var MedAgeFemale = new L.LayerGroup()
 
 // Grabbing our GeoJSON data..
@@ -199,7 +376,7 @@ d3.json(geoData, function (data) {
         scale: ["#ffffb2", "#b10026"],
   
         // Number of breaks in step range
-        steps: 10,
+        steps: 6,
   
         // q for quartile, e for equidistant, k for k-means
         mode: "q",
@@ -215,8 +392,52 @@ d3.json(geoData, function (data) {
                 "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
         }  
     }).addTo(MedAgeFemale)
+
+    var legend5 = L.control({position: "bottomleft"});
+    legend5.onAdd = function () {
+        var div = L.DomUtil.create("div", "info legend");
+        var limits = geojson.options.limits;
+        var colors = geojson.options.colors;
+        var labels = [];
+    
+        // Add min & max
+        var legendInfo = "<h5>Median Age Female</h5>" +
+            "<div class=\"labels\">" +
+            "<div class=\"min\">" + limits[0] + "</div>" +
+            "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+            "</div>";
+    
+        div.innerHTML = legendInfo;
+    
+        limits.forEach(function (limit, index) {
+            labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+        });
+    
+        div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+        return div;
+    };
+    
+    // Adding legend to the map
+    legend5.addTo(map);
+
+    map.on('overlayadd', function(eventLayer){
+        if (eventLayer.name === 'Real Estate Prices'){
+            map.removeControl(legend5);
+        } else if (eventLayer.name === 'Bachelors Degree') {
+            map.removeControl(legend5);
+        } else if (eventLayer.name === 'Income Per Capita') {
+            map.removeControl(legend5);
+        } else if (eventLayer.name === 'Median Age Male') {
+            map.removeControl(legend5);
+        } else if (eventLayer.name === 'Median Age Female') {
+            map.addControl(legend5);
+        } else if (eventLayer.name === 'Public Transportation') {
+            map.removeControl(legend5);
+        }
+    });
 });
 
+/////////////////////////////////PUBLIC TRANSPORTATION/////////////////////////////////////
 var PubTrans = new L.LayerGroup()
 
 // Grabbing our GeoJSON data..
@@ -231,7 +452,7 @@ d3.json(geoData, function (data) {
         scale: ["#ffffb2", "#b10026"],
   
         // Number of breaks in step range
-        steps: 10,
+        steps: 6,
   
         // q for quartile, e for equidistant, k for k-means
         mode: "q",
@@ -247,6 +468,49 @@ d3.json(geoData, function (data) {
                 "$" + feature.properties.avg2019); /////////////////////////////////////////////////////////CHANGE 2010-2020
         }  
     }).addTo(PubTrans)
+
+    var legend6 = L.control({position: "bottomleft"});
+    legend6.onAdd = function () {
+        var div = L.DomUtil.create("div", "info legend");
+        var limits = geojson.options.limits;
+        var colors = geojson.options.colors;
+        var labels = [];
+    
+        // Add min & max
+        var legendInfo = "<h5>Public Transportation</h5>" +
+            "<div class=\"labels\">" +
+            "<div class=\"min\">" + limits[0] + "</div>" +
+            "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+            "</div>";
+    
+        div.innerHTML = legendInfo;
+    
+        limits.forEach(function (limit, index) {
+            labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+        });
+    
+        div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+        return div;
+    };
+    
+    // Adding legend to the map
+    legend6.addTo(map);
+
+    map.on('overlayadd', function(eventLayer){
+        if (eventLayer.name === 'Real Estate Prices'){
+            map.removeControl(legend6);
+        } else if (eventLayer.name === 'Bachelors Degree') {
+            map.removeControl(legend6);
+        } else if (eventLayer.name === 'Income Per Capita') {
+            map.removeControl(legend6);
+        } else if (eventLayer.name === 'Median Age Male') {
+            map.removeControl(legend6);
+        } else if (eventLayer.name === 'Median Age Female') {
+            map.removeControl(legend6);
+        } else if (eventLayer.name === 'Public Transportation') {
+            map.addControl(legend6);
+        }
+    });
 });
 
 /////////////////////////////////LAYER CONTROL/////////////////////////////////////
@@ -260,7 +524,6 @@ zoomOffset: -1,
 id: "mapbox/streets-v11",
 accessToken: "pk.eyJ1Ijoiam9zaHVham9ubWUiLCJhIjoiY2tmcHlyeTllMDBsdjJzcWw5MnJtYnF2dSJ9.dyS8tMHNg1m8QpV3_eAwOA" ///////////////DONT FORGET TO GET RID OF THIS
 }).addTo(map);
-
 
 var dark = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     //attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
@@ -293,6 +556,7 @@ var overlayMaps = {
     'Median Age Female':MedAgeFemale,
     'Public Transportation':PubTrans,
 };
-L.control.layers(baseMaps, overlayMaps, {collapsed: false}).addTo(map);
+
+L.control.layers(baseMaps, overlayMaps, {collapsed: true}).addTo(map);
 
 
