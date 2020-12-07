@@ -114,7 +114,7 @@ d3.json(geoData, function (data) {
     };
     
     // Adding legend to the map
-    legend.addTo(map);
+    legend.remove(map);
 
     map.on('overlayadd', function(eventLayer){
         if (eventLayer.name === 'Real Estate Prices'){
@@ -190,7 +190,7 @@ d3.json(geoData, function (data) {
     };
     
     // Adding legend to the map
-    legend2.addTo(map);
+    legend2.remove(map);
 
     map.on('overlayadd', function(eventLayer){
         if (eventLayer.name === 'Real Estate Prices'){
@@ -266,7 +266,7 @@ d3.json(geoData, function (data) {
     };
     
     // Adding legend to the map
-    legend3.addTo(map);
+    legend3.remove(map);
 
     map.on('overlayadd', function(eventLayer){
         if (eventLayer.name === 'Real Estate Prices'){
@@ -342,7 +342,7 @@ d3.json(geoData, function (data) {
     };
     
     // Adding legend to the map
-    legend4.addTo(map);
+    legend4.remove(map);
 
     map.on('overlayadd', function(eventLayer){
         if (eventLayer.name === 'Real Estate Prices'){
@@ -418,7 +418,7 @@ d3.json(geoData, function (data) {
     };
     
     // Adding legend to the map
-    legend5.addTo(map);
+    legend5.remove(map);
 
     map.on('overlayadd', function(eventLayer){
         if (eventLayer.name === 'Real Estate Prices'){
@@ -494,7 +494,7 @@ d3.json(geoData, function (data) {
     };
     
     // Adding legend to the map
-    legend6.addTo(map);
+    legend6.remove(map);
 
     map.on('overlayadd', function(eventLayer){
         if (eventLayer.name === 'Real Estate Prices'){
