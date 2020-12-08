@@ -73,7 +73,7 @@ d3.json(geoData, function (data) {
         scale: ["#ffffb2", "#b10026"],
   
         // Number of breaks in step range
-        steps: 6,
+        steps: 10,
   
         // q for quartile, e for equidistant, k for k-means
         mode: "q",
@@ -90,28 +90,29 @@ d3.json(geoData, function (data) {
         }  
     }).addTo(RealEstate);
     
-    var legend = L.control({position: "bottomleft"});
-    legend.onAdd = function () {
-        var div = L.DomUtil.create("div", "info legend");
-        var limits = geojson.options.limits;
-        var colors = geojson.options.colors;
-        var labels = [];
-    
-        // Add min & max
-        var legendInfo = "<h5>Average House Value</h5>" +
-            "<div class=\"labels\">" +
-            "<div class=\"min\">" + limits[0] + "</div>" +
-            "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
-            "</div>";
-    
-        div.innerHTML = legendInfo;
-    
-        limits.forEach(function (limit, index) {
-            labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
-        });
-    
-        div.innerHTML += "<ul>" + labels.join("") + "</ul>";
-        return div;
+  // Set up the legend
+  var legend = L.control({position: "bottomleft"});
+  legend.onAdd = function () {
+      var div = L.DomUtil.create("div", "info legend");
+      var limits = geojson.options.limits;
+      var colors = geojson.options.colors;
+      var labels = [];
+
+      // Add min & max
+      var legendInfo = "<h5>Average House Value</h5>" +
+          "<div class=\"labels\">" +
+          "<div class=\"min\">" + limits[0] + "</div>" +
+          "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
+          "</div>";
+
+      div.innerHTML = legendInfo;
+
+      limits.forEach(function (limit, index) {
+          labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+      });
+
+      div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+      return div;
     };
     
     // Adding legend to the map
@@ -140,7 +141,7 @@ var Bach = new L.LayerGroup()
 // Grabbing our GeoJSON data..
 d3.json(geoData, function (data) {
     // Create a new choropleth layer
-    geojson = L.choropleth(data, {
+    geojson2 = L.choropleth(data, {
   
         // Define what  property in the features to use
         valueProperty: "Bachelor's degree > 25", ///////////////////////CHANGE 2010-2020
@@ -149,7 +150,7 @@ d3.json(geoData, function (data) {
         scale: ["#ffffb2", "#b10026"],
   
         // Number of breaks in step range
-        steps: 6,
+        steps: 10,
   
         // q for quartile, e for equidistant, k for k-means
         mode: "q",
@@ -169,8 +170,8 @@ d3.json(geoData, function (data) {
     var legend2 = L.control({position: "bottomleft"});
     legend2.onAdd = function () {
         var div = L.DomUtil.create("div", "info legend");
-        var limits = geojson.options.limits;
-        var colors = geojson.options.colors;
+        var limits = geojson2.options.limits;
+        var colors = geojson2.options.colors;
         var labels = [];
     
         // Add min & max
@@ -216,7 +217,7 @@ var IncPerCap = new L.LayerGroup()
 // Grabbing our GeoJSON data..
 d3.json(geoData, function (data) {
     // Create a new choropleth layer
-    geojson = L.choropleth(data, {
+    geojson3 = L.choropleth(data, {
   
         // Define what  property in the features to use
         valueProperty: "Income per capita", ///////////////////////CHANGE 2010-2020
@@ -245,8 +246,8 @@ d3.json(geoData, function (data) {
     var legend3 = L.control({position: "bottomleft"});
     legend3.onAdd = function () {
         var div = L.DomUtil.create("div", "info legend");
-        var limits = geojson.options.limits;
-        var colors = geojson.options.colors;
+        var limits = geojson3.options.limits;
+        var colors = geojson3.options.colors;
         var labels = [];
     
         // Add min & max
@@ -292,7 +293,7 @@ var MedAgeMale = new L.LayerGroup()
 // Grabbing our GeoJSON data..
 d3.json(geoData, function (data) {
     // Create a new choropleth layer
-    geojson = L.choropleth(data, {
+    geojson4 = L.choropleth(data, {
   
         // Define what  property in the features to use
         valueProperty: "Median Age Male", ///////////////////////CHANGE 2010-2020
@@ -321,8 +322,8 @@ d3.json(geoData, function (data) {
     var legend4 = L.control({position: "bottomleft"});
     legend4.onAdd = function () {
         var div = L.DomUtil.create("div", "info legend");
-        var limits = geojson.options.limits;
-        var colors = geojson.options.colors;
+        var limits = geojson4.options.limits;
+        var colors = geojson4.options.colors;
         var labels = [];
     
         // Add min & max
@@ -368,7 +369,7 @@ var MedAgeFemale = new L.LayerGroup()
 // Grabbing our GeoJSON data..
 d3.json(geoData, function (data) {
     // Create a new choropleth layer
-    geojson = L.choropleth(data, {
+    geojson5 = L.choropleth(data, {
   
         // Define what  property in the features to use
         valueProperty: "Median Age Female", ///////////////////////CHANGE 2010-2020
@@ -397,8 +398,8 @@ d3.json(geoData, function (data) {
     var legend5 = L.control({position: "bottomleft"});
     legend5.onAdd = function () {
         var div = L.DomUtil.create("div", "info legend");
-        var limits = geojson.options.limits;
-        var colors = geojson.options.colors;
+        var limits = geojson5.options.limits;
+        var colors = geojson5.options.colors;
         var labels = [];
     
         // Add min & max
@@ -444,7 +445,7 @@ var PubTrans = new L.LayerGroup()
 // Grabbing our GeoJSON data..
 d3.json(geoData, function (data) {
     // Create a new choropleth layer
-    geojson = L.choropleth(data, {
+    geojson6 = L.choropleth(data, {
   
         // Define what  property in the features to use
         valueProperty: "Public transportation", ///////////////////////CHANGE 2010-2020
@@ -473,8 +474,8 @@ d3.json(geoData, function (data) {
     var legend6 = L.control({position: "bottomleft"});
     legend6.onAdd = function () {
         var div = L.DomUtil.create("div", "info legend");
-        var limits = geojson.options.limits;
-        var colors = geojson.options.colors;
+        var limits = geojson6.options.limits;
+        var colors = geojson6.options.colors;
         var labels = [];
     
         // Add min & max
@@ -558,6 +559,6 @@ var overlayMaps = {
     'Public Transportation':PubTrans,
 };
 
-L.control.layers(baseMaps, overlayMaps, {collapsed: true}).addTo(map);
+L.control.layers(baseMaps, overlayMaps, {collapsed: false}).addTo(map);
 
 
