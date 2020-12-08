@@ -78,12 +78,14 @@
       <div class="carousel-item active">
         <div class="carousel-container">
           <h2 class="animate__animated animate__fadeInDown">Tech Hub <span>Prediction</span></h2>
-          <form class="animate__animated animate__fadeInUp" action="{{ url_for('predict')}}"method="POST">
-            <input class="animate__animated animate__fadeInUp" type="text" name="zipcode input" placeholder="Zipcode Input" required="required" />
+          <!-- <form class="animate__animated animate__fadeInUp" action="{{ url_for('predict')}}"method="POST"> -->
+            <form name="myform" onSubmit="return handleClick()">
+            <input class="animate__animated animate__fadeInUp" type="text" id="USERINPUT" name="zipcode input" placeholder="Zipcode Input" required="required" />
             <!-- <a class="btn-get-started animate__animated animate__fadeIn" onClick="document.getElementById('middle').scrollIntoView({behavior: 'smooth'});">Submit</a> -->
-            <button type="submit" class="btn-get-started animate__animated animate__fadeIn">
+            <button type="submit" class="btn-get-started animate__animated animate__fadeIn" onClick="document.getElementById('middle').scrollIntoView({behavior: 'smooth'});">
               Check Status
             </button>
+          </form>
             <br>
           <p style= "color:white">
             {% for result in prediction_text %}
