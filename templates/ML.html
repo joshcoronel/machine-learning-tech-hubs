@@ -144,7 +144,7 @@
   
                   var map = L.map("map", {
                       center: coordinates,
-                      zoom: 11
+                      zoom: 12
                   });
   
                   // Adding tile layer
@@ -156,10 +156,13 @@
                       id: "mapbox/streets-v11",
                       accessToken: "pk.eyJ1Ijoiam9zaHVham9ubWUiLCJhIjoiY2tmcHlyeTllMDBsdjJzcWw5MnJtYnF2dSJ9.dyS8tMHNg1m8QpV3_eAwOA"
                   }).addTo(map);
+
+                  L.marker(coordinates).addTo(map);
+
                   return map
                   }
   
-                  var map = default_map([40.7127281,-74.0060152])
+                  default_map({{ coordinates }})
   
                   </script>
   
@@ -286,7 +289,7 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     
     <!-- JS -->
-    <script type="text/javascript" src="../static/js/ML_map.js"></script>
+    <!-- <script type="text/javascript" src="../static/js/ML_map.js"></script> -->
 
     <!-- Vendor JS Files -->
     <script src="../static/vendor/jquery/jquery.min.js"></script>
