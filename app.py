@@ -59,7 +59,7 @@ def predict():
 
     ziptocoords = [LAT,LNG]  
 
-    return render_template('ML.html', scroll='middle', coordinates = ziptocoords,  prediction_text = results)
+    return render_template('ML.html', scroll='middle', prediction_text = results, coordinates = ziptocoords)
 
 @app.route('/ML')
 def ML():
