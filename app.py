@@ -6,6 +6,8 @@ import pickle
 import pandas as pd
 import numpy as np
 import os
+import requests
+import json
 
 # We create a Flask app and deserialize the machine learning model 
 app = Flask(__name__)
@@ -40,11 +42,24 @@ def predict():
         else:
             output = "No"
 
-        results = [f"Move your next start up here? {output}!", f"{city}, {state} {zipcode[0]}", f"Average Real Estate: ${final_features[0]}",f"Income per capita: ${final_features[1]}",f"Percentage of Population with Bachelors: {round(100*final_features[4],2)}%", f"Percentage of population that use public transportation: {round(100*final_features[5],2)}%", f"Median Age Female: {final_features[2]}", f"Median Age Male: {final_features[3]}"] 
+        # results = [f"Move your next start up here? {output}!", f"{city}, {state} {zipcode[0]}", f"Average Real Estate: ${final_features[0]}",f"Income per capita: ${final_features[1]}",f"Percentage of Population with Bachelors: {round(100*final_features[4],2)}%", f"Percentage of population that use public transportation: {round(100*final_features[5],2)}%", f"Median Age Female: {final_features[2]}", f"Median Age Male: {final_features[3]}"] 
+        results = [f"{output}!", f"{city}, {state} {zipcode[0]}", f"${final_features[0]}",f"${final_features[1]}",f"{round(100*final_features[4],2)}%", f"{round(100*final_features[5],2)}%", f"{final_features[2]}", f"{final_features[3]}"] 
     else:
         results = ["Invalid zip code. Try again."]
 
-    return render_template('ML.html', prediction_text = results)
+    #LAT/LNG FINDER
+    zipurl = "https://maps.googleapis.com/maps/api/geocode/json?components=postal_code:"+zipcode[0]+"|country:US&key=AIzaSyCXHiDgN9t3DXorh6zgafpCdv-_Jop4HLs" 
+    
+    response=requests.get(zipurl)
+    Jresponse = response.text
+    data=json.loads(Jresponse)
+
+    LAT = data['results'][0]['geometry']['location']['lat']
+    LNG = data['results'][0]['geometry']['location']['lng']
+
+    ziptocoords = [LAT,LNG]  
+
+    return render_template('ML.html', scroll='middle', coordinates = ziptocoords,  prediction_text = results)
 
 @app.route('/ML')
 def ML():
