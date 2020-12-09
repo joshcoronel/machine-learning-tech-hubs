@@ -15,7 +15,7 @@
 ## ✨ [Visit the Website Here](https://tech-hub-predictor.herokuapp.com/)
 
 <p>
-  <img src="https://raw.githubusercontent.com/joshuajonme/machine-learning-tech-hubs/main/1.PNG" alt="demo"/>
+  <img src="https://raw.githubusercontent.com/joshuajonme/machine-learning-tech-hubs/main/static/img/1.PNG" alt="demo"/>
 </p>
 
 <!-- <p>
