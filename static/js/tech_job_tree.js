@@ -234,22 +234,22 @@
           ['Data Scientists and Mathematical Science Occupations, All Other .',    'Boston',            520],
 
           //"Trenton, NJ"
-          ['Computer Systems Analysts .',    'San Jose',            1390],
-          ['Information Security Analysts .',       'San Jose',            210],
-          ['Computer Network Support Specialists .',    'San Jose',            40],
-          ['Computer User Support Specialists .',    'San Jose',            1260],
-          ['Computer Network Architects .',    'San Jose',            270],
-          ['Network and Computer Systems Administrators .',    'San Jose',            1000],
-          ['Database Administrators and Architects .',    'San Jose',            360],
+          ['Computer Systems Analysts .',    'Trenton',            1390],
+          ['Information Security Analysts .',       'Trenton',            210],
+          ['Computer Network Support Specialists .',    'Trenton',            40],
+          ['Computer User Support Specialists .',    'Trenton',            1260],
+          ['Computer Network Architects .',    'Trenton',            270],
+          ['Network and Computer Systems Administrators .',    'Trenton',            1000],
+          ['Database Administrators and Architects .',    'Trenton',            360],
         
-          ['Computer Programmers .',    'San Jose',            660],
-          ['Software Developers and Software Quality Assurance Analysts and Testers .',    'San Jose',            4140],
-          ['Web Developers and Digital Interface Designers .',    'San Jose',            270],
-          ['Computer Occupations, All Other .',    'San Jose',            530],
-          ['Actuaries .',    'San Jose',            50],
-          ['Operations Research Analysts .',    'San Jose',            200],
-          ['Statisticians .',    'San Jose',            300],
-          ['Data Scientists and Mathematical Science Occupations, All Other .',    'San Jose',            120],
+          ['Computer Programmers .',    'Trenton',            660],
+          ['Software Developers and Software Quality Assurance Analysts and Testers .',    'Trenton',            4140],
+          ['Web Developers and Digital Interface Designers .',    'Trenton',            270],
+          ['Computer Occupations, All Other .',    'Trenton',            530],
+          ['Actuaries .',    'Trenton',            50],
+          ['Operations Research Analysts .',    'Trenton',            200],
+          ['Statisticians .',    'Trenton',            300],
+          ['Data Scientists and Mathematical Science Occupations, All Other .',    'Trenton',            120],
 
           
  
