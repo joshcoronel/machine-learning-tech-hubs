@@ -1,4 +1,4 @@
-<h1>nextTech - Find your next Start Up City here</h1>
+<h1>nextTech - Find Your Next Start Up City Here</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000" />
   <a href="1" target="_blank">
@@ -14,9 +14,8 @@
 
 ## ✨ [Visit the Website Here](https://tech-hub-predictor.herokuapp.com/)
 
-<p>
-  <img src="https://raw.githubusercontent.com/joshuajonme/machine-learning-tech-hubs/main/1.PNG" alt="demo"/>
-</p>
+![](static/img/1.PNG)
+
 
 <!-- <p>
   <img src="https://raw.githubusercontent.com/joshuajonme/machine-learning-tech-hubs/main/2.PNG" alt="demo"/>

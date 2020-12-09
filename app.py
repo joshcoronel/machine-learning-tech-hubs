@@ -32,9 +32,7 @@ def predict():
     print(df.head())
     if zipcode[0] in list(df["Zip Code"]):
         features = df.loc[df['Zip Code'] == zipcode[0]].values[0]
-        print(features)
         city = features[3]
-        print(city)
         state = features[2]
         final_features = np.delete(features,[0,1,2,3,4])
 
