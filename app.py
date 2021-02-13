@@ -44,7 +44,7 @@ def predict():
             output = "No"
 
         # results = [f"Move your next start up here? {output}!", f"{city}, {state} {zipcode[0]}", f"Average Real Estate: ${final_features[0]}",f"Income per capita: ${final_features[1]}",f"Percentage of Population with Bachelors: {round(100*final_features[4],2)}%", f"Percentage of population that use public transportation: {round(100*final_features[5],2)}%", f"Median Age Female: {final_features[2]}", f"Median Age Male: {final_features[3]}"] 
-        results = [f"{output}!", f"{city}, {state} {zipcode[0]}", f"${final_features[0]}",f"${final_features[1]}",f"{round(100*final_features[4],2)}%", f"{round(100*final_features[5],2)}%", f"{final_features[2]}", f"{final_features[3]}"] 
+        results = [f"{output}!", f"{city}, {state} {zipcode[0]}", f"${final_features[0]}",f"${final_features[1]}",f"{round(final_features[4],2)}%", f"{round(final_features[5],2)}%", f"{final_features[2]}", f"{final_features[3]}"] 
     else:
         results = ["Invalid zip code. Try again."]
 
